@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { HeaderComponent } from "./components/header/header.component";
+import { environment } from '../environments/environment.dev';
 
 @Component({
     selector: 'app-root',
@@ -16,6 +17,8 @@ export class AppComponent {
 
   firestore: Firestore = inject(Firestore);
   items$!: Observable<any[]>;
+
+  environment =  environment;
 
   title = 're-learn';
 

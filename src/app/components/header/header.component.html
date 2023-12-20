@@ -1,0 +1,50 @@
+<header class="header">
+    <div class="header__options">
+        <div class="header__options--icon">
+            <span> Re.Learn</span>
+            <ng-container *ngTemplateOutlet="menu_icon"></ng-container>
+        </div>
+        @if (openMenu) {
+        <ng-container *ngTemplateOutlet="header_menus"></ng-container>
+        }
+    </div>
+    <div>
+        @if (openMenu) {
+        <ng-container *ngTemplateOutlet="header_buttons"></ng-container>
+        }
+    </div>
+</header>
+
+<!-- Reusable Templates -->
+
+<ng-template #header_menus>
+    <ul class="header__options">
+        <li class="header__options--item">
+            <a href="#">Strength</a>
+        </li>
+        <li class="header__options--item">
+            <a href="#">Commiunity</a>
+        </li>
+        <li class="header__options--item">
+            <a href="#">Showcase</a>
+        </li>
+    </ul>
+</ng-template>
+
+<ng-template #header_buttons>
+    <ul class="header__options">
+        <li class="header__options--button">
+            <a href="#">What is Re.Learn ?</a>
+        </li>
+        <li class="header__options--button">
+            <a href="#">Login</a>
+        </li>
+    </ul>
+</ng-template>
+
+<ng-template #menu_icon>
+    <svg (click)="openMenu = !openMenu" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+        stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+    </svg>
+</ng-template>

@@ -1,0 +1,15 @@
+/* FOR LAPTOP */
+/* ----------- Retina Screens ----------- */
+@mixin for-web {
+    @media (min-width: 767px) {
+      @content;
+    }
+  }
+  
+  /* FOR PHONE */
+  /* Portrait */
+  @mixin for-phone {
+    @media (max-width: 767px) {
+      @content;
+    }
+  }

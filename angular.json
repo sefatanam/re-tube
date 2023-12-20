@@ -55,8 +55,8 @@
               ],
               "fileReplacements": [
                 {
-                  "with": "./environments/environment.prod.ts",
-                  "replace": "./environments/environment.dev.ts"
+                  "with": "src/environments/environment.prod.ts",
+                  "replace": "src/environments/environment.dev.ts"
                 }
               ],
               "outputHashing": "all"

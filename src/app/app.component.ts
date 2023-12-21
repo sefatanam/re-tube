@@ -5,20 +5,23 @@ import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { HeaderComponent } from "./components/header/header.component";
 import { environment } from '../environments/environment.dev';
+import { MatSidenavModule } from '@angular/material/sidenav';
+
 
 @Component({
-    selector: 'app-root',
-    standalone: true,
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
-    imports: [CommonModule, RouterOutlet, HeaderComponent]
+  selector: 'app-root',
+  standalone: true,
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  imports: [CommonModule, RouterOutlet, HeaderComponent, MatSidenavModule]
 })
 export class AppComponent {
 
+  openMenu: boolean = false;
   firestore: Firestore = inject(Firestore);
   items$!: Observable<any[]>;
 
-  environment =  environment;
+  environment = environment;
 
   title = 're-learn';
 

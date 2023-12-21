@@ -11,7 +11,7 @@
         @apply font-medium;
       }
       &--button {
-        @apply bg-black text-white rounded-full py-2 px-4 border-2 border-black hover:cursor-pointer;
+          @apply bg-black text-white rounded-full py-2 px-4 border-2 border-black hover:cursor-pointer;
 
         &:hover{
           @apply  text-black bg-white ;
@@ -29,8 +29,12 @@
       @apply flex gap-4 items-center;
       &--icon {
         svg {
-          display: none;
+          @apply hidden;
         }
+      }
+
+      &--phone{
+        @apply hidden;
       }
     }
   }
@@ -42,13 +46,25 @@
     @apply grid px-4;
 
     &__options {
-      @apply grid gap-4 items-center pb-4;
+      // @apply grid gap-4 items-center pb-4;
+
+      &--always-visible{
+        @apply visible flex justify-between items-center;
+      }
+
+      &--web{
+        @apply hidden;
+      }
 
       &--icon {
-        @apply flex justify-between;Í
+        @apply flex items-center gap-4;
         svg {
-          display: block;
+          @apply block;
         }
+      }
+
+      &--phone{
+        @apply flex gap-4;
       }
     }
   }

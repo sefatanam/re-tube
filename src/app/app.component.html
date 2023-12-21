@@ -1,10 +1,11 @@
-<app-header></app-header>
-
-<pre>
-    {{environment | json}}
-</pre>
-
-<pre>
-    Firebase Languages/Framework Collection
-    {{items$ | async | json}}
-</pre>
+<mat-drawer-container class="mat-drawer-container">
+    <mat-drawer mode="over" [opened]="openMenu" class="mat-drawer">
+        <h1>Hello World</h1>
+    </mat-drawer>
+    <mat-drawer-content class="mat-drawer-content">
+        <app-header (onMenuClick)="openMenu=!openMenu"></app-header>
+        <main>
+            <h1>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi odit amet corporis tempore sunt. Voluptates in debitis dolorum? Voluptate quasi quod nemo vitae nostrum. Veniam dolor natus explicabo a laboriosam!</h1>
+        </main>
+    </mat-drawer-content>
+</mat-drawer-container>

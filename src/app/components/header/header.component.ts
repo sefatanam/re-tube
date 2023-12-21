@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, afterNextRender } from '@angular/core';
+import { Component, EventEmitter, Output, afterNextRender } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -9,10 +9,5 @@ import { Component, afterNextRender } from '@angular/core';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  openMenu: boolean = true;
-  constructor() {
-    afterNextRender(() => {
-      this.openMenu = window.matchMedia('(max-width: 767px)').matches ? false : true;
-    })
-  }
+  @Output() onMenuClick = new EventEmitter<void>();
 }

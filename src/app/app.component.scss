@@ -1,0 +1,13 @@
+@import '../styles/media.scss';
+
+.mat-drawer-container{
+    @apply min-h-screen bg-greenish;
+}
+
+.mat-drawer{
+    @apply min-h-screen bg-greenish min-w-64;
+}
+
+.mat-drawer-content{
+    @apply min-h-screen bg-greenish;
+}

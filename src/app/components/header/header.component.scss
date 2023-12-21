@@ -11,7 +11,11 @@
         @apply font-medium;
       }
       &--button {
-        @apply bg-black text-white rounded-full py-2 px-4;
+        @apply bg-black text-white rounded-full py-2 px-4 border-2 border-black hover:cursor-pointer;
+
+        &:hover{
+          @apply  text-black bg-white ;
+        }
       }
     }
   }

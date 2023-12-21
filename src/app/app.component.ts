@@ -3,9 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { HeaderComponent } from "./components/header/header.component";
 import { environment } from '../environments/environment.dev';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { MainContentComponent } from './components/main-content/main-content.component';
 
 
 @Component({
@@ -13,11 +12,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
   standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [CommonModule, RouterOutlet, HeaderComponent, MatSidenavModule]
+  imports: [CommonModule, RouterOutlet, MainContentComponent]
 })
 export class AppComponent {
 
-  openMenu: boolean = false;
   firestore: Firestore = inject(Firestore);
   items$!: Observable<any[]>;
 

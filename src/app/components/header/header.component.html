@@ -1,9 +1,8 @@
-
 <header class="header">
     <div class="header__options header__options--always-visible">
         <div class="header__options--icon">
             <ng-container *ngTemplateOutlet="menu_icon"></ng-container>
-            <span> Re.Learn</span>
+            <span>Re.Learn</span>
         </div>
         <ng-container *ngTemplateOutlet="header_menus"></ng-container>
         <ng-container *ngTemplateOutlet="header_buttons_phone"></ng-container>
@@ -17,38 +16,41 @@
 
 <ng-template #header_menus>
     <ul class="header__options header__options--web">
+        @for (routeMenu of routeMenus; track $index) {
         <li class="header__options--item">
-            <a href="#">Strength</a>
+            <a [routerLink]="routeMenu.route">{{routeMenu.name}}</a>
         </li>
+        }@empty {
         <li class="header__options--item">
-            <a href="#">Commiunity</a>
+            <a routerLink="#">{{emptyMessage}}</a>
         </li>
-        <li class="header__options--item">
-            <a href="#">Showcase</a>
-        </li>
+        }
     </ul>
 </ng-template>
 
 <ng-template #header_buttons>
     <ul class="header__options header__options--web">
-        <li>
-            <a class="header__options--button" href="#" mat-raised-button color="accent" routerLink="">What is Re.Learn ?</a>
-        </li>
-        <li>
-            <a class="header__options--button" href="#" mat-raised-button color="accent" routerLink="login">Login</a>
-        </li>
+        <ng-container *ngTemplateOutlet="routeButtonsContainer"></ng-container>
     </ul>
 </ng-template>
 
 <ng-template #header_buttons_phone>
     <ul class="header__options header__options--phone">
-        <li >
-            <a class="header__options--button" routerLink="" mat-raised-button color="accent">What is Re.Learn ?</a>
-        </li>
-        <li >
-            <a class="header__options--button" routerLink="login" mat-raised-button color="accent">Login</a>
-        </li>
+        <ng-container *ngTemplateOutlet="routeButtonsContainer"></ng-container>
     </ul>
+</ng-template>
+
+<ng-template #routeButtonsContainer>
+    @for (routeButton of routeButtons; track $index) {
+    <li>
+        <a class="header__options--button" mat-raised-button color="accent"
+            [routerLink]="routeButton.route">{{routeButton.name}}</a>
+    </li>
+    } @empty {
+    <li>
+        <a class="header__options--button" mat-raised-button color="accent" routerLink="#">{{emptyMessage}}</a>
+    </li>
+    }
 </ng-template>
 
 <ng-template #menu_icon>

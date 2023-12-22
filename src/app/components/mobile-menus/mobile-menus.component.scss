@@ -1,0 +1,15 @@
+
+.mobile__menus{
+    @apply flex flex-col gap-1 bg-black h-full;
+    &--item{
+        @apply flex items-center;
+    }
+
+    &--link{
+        @apply w-full h-10;
+    }
+}
+
+:host .mat-mdc-raised-button{
+    box-shadow: none;
+}

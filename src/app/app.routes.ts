@@ -9,4 +9,4 @@ export const routes: Routes = [
         path:'login',
         loadComponent:()=>import('./pages/auth/continue/continue.component').then(c=>c.ContinueComponent)
     }
-];
+]

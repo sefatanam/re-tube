@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { HeaderComponent } from '../header/header.component';
 import { MobileMenusComponent } from '../mobile-menus/mobile-menus.component';
+import { RootMenu } from '@typings/menu.type';
 
 @Component({
   selector: 'app-main-content',
@@ -13,4 +14,5 @@ import { MobileMenusComponent } from '../mobile-menus/mobile-menus.component';
 })
 export class MainContentComponent {
   openMenu: boolean = false;
+  @Input() menus: RootMenu = { routeButtons: [], routeMenus: [] };
 }

@@ -1,15 +1,21 @@
-<ul>
-    <li><a mat-flat-button>Basic</a></li>
-    <li><a mat-flat-button>Basic</a></li>
-    <li><a mat-flat-button>Basic</a></li>
-    <li><a mat-flat-button>Basic</a></li>
-    <li><a mat-flat-button>Basic</a></li>
-    <li><a mat-flat-button>Basic</a></li>
+<ul class="mobile__menus" (click)="onMenuItemClick.emit()">
+    @for (item of menus.routeMenus; track $index) {
+    <li class="mobile__menus--item">
+        <a class="mobile__menus--link" mat-raised-button color="accent" [routerLink]="item.route">{{item.name}}</a>
+    </li>
+    }@empty {
+    <li class="mobile__menus--item">
+        <a class="mobile__menus--link" mat-raised-button color="accent" routerLink="#">No Permission's Menu 😕</a>
+    </li>
+    }
+    @for (item of menus.routeButtons; track $index) {
+    <li class="mobile__menus--item">
+        <a class="mobile__menus--link" mat-raised-button color="accent" [routerLink]="item.route">{{item.name}}</a>
+    </li>
+    }
+    <!-- @empty {
+    <li class="mobile__menus--item">
+        <a class="mobile__menus--link" mat-raised-button color="accent" routerLink="#">No Permission's Button 😕</a>
+    </li>
+    } -->
 </ul>
-<!-- 
-
-<button mat-flat-button color="primary">Primary</button>
-        <button mat-flat-button color="accent">Accent</button>
-        <button mat-flat-button color="warn">Warn</button>
-        <button mat-flat-button disabled>Disabled</button>
-        <a mat-flat-button href="https://www.google.com/" target="_blank">Link</a></li> -->

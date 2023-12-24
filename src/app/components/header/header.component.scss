@@ -1,7 +1,7 @@
 @import "../../../styles/media.scss";
 
 @mixin header-common {
-  @apply border-b-2 border-b-black p-4;
+  @apply border-b-2 border-b-gray p-4;
   .header {
     &__options {
       &--icon {

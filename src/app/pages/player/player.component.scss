@@ -1,0 +1,59 @@
+@import "../../../styles/media.scss";
+
+.accordion-title{
+    @apply font-semibold;
+}
+
+:host mat-expansion-panel {
+    --mat-expansion-container-shape:0.75rem;
+}
+
+@include for-phone {
+  .player {
+    &-wrapper{
+        @apply grid p-4 gap-4;
+
+    }
+    &-src {
+      @apply w-full h-72 rounded-xl overflow-hidden;
+    }
+
+    &-info{
+        &-title{
+            @apply font-semibold;
+        }
+    }
+
+    &-list{
+        &-wrapper{
+            @apply grid;
+        }
+
+        &-container{
+            @apply grid;
+        }
+
+        &-items{
+            @apply grid gap-2;
+        }
+
+        &-item{
+            @apply flex items-start gap-2 p-2 rounded;
+            img{
+                @apply h-20 w-32 rounded overflow-hidden object-cover;
+            }
+
+            p{
+                @apply font-sans;
+            }
+
+            &.active{
+                @apply bg-gray;
+            }
+        }
+
+
+
+    }
+  }
+}

@@ -9,8 +9,8 @@ export class MenuService {
 
   private routeMenus: Menu[] = [
     {
-      name: 'Strength',
-      route: '/home'
+      name: 'Player',
+      route: '/player'
     },
     {
       name: 'Community',

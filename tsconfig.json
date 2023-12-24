@@ -27,6 +27,7 @@
       "@services/*": ["services/8"],
       "@components/*":["app/components/*"],
       "@pages/*":["app/pages/*"],
+      "@guards/*":["guards/*"],
     }
   },
   "angularCompilerOptions": {

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
@@ -7,6 +7,8 @@ import { environment } from '../environments/environment.dev';
 import { MainContentComponent } from './components/main-content/main-content.component';
 import { MenuService } from 'services/menu.service';
 import { RootMenu } from '@typings/menu.type';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { AuthService } from 'services/auth.service';
 
 
 @Component({
@@ -14,22 +16,30 @@ import { RootMenu } from '@typings/menu.type';
   standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [CommonModule, RouterOutlet, MainContentComponent]
+  imports: [CommonModule, RouterOutlet, MainContentComponent],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  environment = environment;
 
-  menuService = inject(MenuService)
+  authService = inject(AuthService);
+  menuService = inject(MenuService);
 
-  rootMenu : RootMenu = this.menuService.rootMenu;
+  rootMenu: RootMenu = this.menuService.rootMenu;
+
   firestore: Firestore = inject(Firestore);
   items$!: Observable<any[]>;
 
-  environment = environment;
-
-  title = 're-learn';
-
-  constructor() {
+  ngOnInit(): void {
     const aCollection = collection(this.firestore, 'items')
     this.items$ = collectionData(aCollection);
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.authService.authUser.set(user)
+      } else {
+        this.authService.authUser.set(null)
+      }
+    })
   }
+
 }

@@ -32,17 +32,25 @@
 
 <ng-template #header_buttons>
     <ul class="header__options header__options--web">
-        <ng-container *ngTemplateOutlet="routeButtonsContainer"></ng-container>
+        @if (!user()) {
+        <ng-container *ngTemplateOutlet="route_buttons_container"></ng-container>
+        }@else if(user()){
+        <ng-container *ngTemplateOutlet="auth_Buttons"></ng-container>
+        }
     </ul>
 </ng-template>
 
 <ng-template #header_buttons_phone>
     <ul class="header__options header__options--phone">
-        <ng-container *ngTemplateOutlet="routeButtonsContainer"></ng-container>
+        @if (!user()) {
+        <ng-container *ngTemplateOutlet="route_buttons_container"></ng-container>
+        } @else if(user()){
+        <ng-container *ngTemplateOutlet="auth_Buttons"></ng-container>
+        }
     </ul>
 </ng-template>
 
-<ng-template #routeButtonsContainer>
+<ng-template #route_buttons_container>
     @for (routeButton of routeButtons; track $index) {
     <li>
         <a mat-raised-button color="accent" [routerLink]="routeButton.route">{{routeButton.name}}</a>
@@ -59,4 +67,10 @@
         stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-6 h-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
     </svg>
+</ng-template>
+
+<ng-template #auth_Buttons>
+    <li>
+        <a mat-raised-button color="accent" routerLink="player">Hey, {{user()?.displayName}}</a>
+    </li>
 </ng-template>

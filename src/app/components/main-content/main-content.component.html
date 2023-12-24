@@ -1,10 +1,10 @@
 <mat-drawer-container class="mat-drawer-container">
     <mat-drawer mode="over" [opened]="openMenu" class="mat-drawer" tabindex="0">
-        <app-mobile-menus [menus]="menus" (onMenuItemClick)="openMenu=!openMenu"></app-mobile-menus>
+        <app-mobile-menus [menus]="menus" (onMenuItemClick)="openMenu=!openMenu" [user]="user"></app-mobile-menus>
     </mat-drawer>
     <mat-drawer-content class="mat-drawer-content">
         <app-header (onMenuClick)="openMenu=!openMenu" [routeButtons]="menus.routeButtons"
-            [routeMenus]="menus.routeMenus"></app-header>
+            [routeMenus]="menus.routeMenus" [user]="user"></app-header>
         <ng-content select="main"></ng-content>
     </mat-drawer-content>
 </mat-drawer-container>

@@ -1,4 +1,4 @@
-<app-main-content [menus]="rootMenu">
+<app-main-content [menus]="rootMenu" [user]="authService.authUser">
     <main>
         <router-outlet></router-outlet>
     </main>

@@ -14,11 +14,11 @@ export class MenuService {
     },
     {
       name: 'Community',
-      route: '/home'
+      route: '#'
     },
     {
       name: 'Showcase',
-      route: '/home'
+      route: '#'
     }
   ]
 

@@ -1,14 +1,16 @@
 <section class="player-wrapper">
     <div class="player-src">
         <!-- <iframe width="100%" height="100%" src="https://www.youtube.com/embed/zXiQZkrJFnA"></iframe> -->
-        <iframe width="100%" height="100%" [src]="safeURL"></iframe>
+        <iframe width="100%" height="100%" [src]="safeURL" allowfullscreen="allowfullscreen"
+            mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen"
+            oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>
     </div>
     <div class="player-info">
         <h4 class="player-info-title">Obito Uchiha [AMV] - Another Love | Naruto Shippuden</h4>
     </div>
     <div class="player-list-wrapper">
         <mat-accordion>
-            <mat-expansion-panel (opened)="panelOpenState = true"
+            <mat-expansion-panel (opened)="panelOpenState = true" [expanded]="panelOpenState"
                 (closed)="panelOpenState = false">
                 <mat-expansion-panel-header>
                     <mat-panel-title>

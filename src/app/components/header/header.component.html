@@ -2,7 +2,7 @@
     <div class="header__options header__options--always-visible">
         <div class="header__options--icon">
             <ng-container *ngTemplateOutlet="menu_icon"></ng-container>
-            <span>Re.Learn</span>
+            <span routerLink="/">Re.Learn</span>
         </div>
         <ng-container *ngTemplateOutlet="header_menus"></ng-container>
         <ng-container *ngTemplateOutlet="header_buttons_phone"></ng-container>
@@ -18,7 +18,9 @@
     <ul class="header__options header__options--web">
         @for (routeMenu of routeMenus; track $index) {
         <li class="header__options--item">
-            <a [routerLink]="routeMenu.route">{{routeMenu.name}}</a>
+            <app-button>
+                <a [routerLink]="routeMenu.route">{{routeMenu.name}}</a>
+            </app-button>
         </li>
         }@empty {
         <li class="header__options--item">

@@ -12,6 +12,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class PlayerComponent {
   panelOpenState = true;
   sanitizer = inject(DomSanitizer)
+  // videoId = '';
   videoId = 'zXiQZkrJFnA'
   safeURL = this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${this.videoId}`)
 

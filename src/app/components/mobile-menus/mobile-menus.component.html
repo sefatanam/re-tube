@@ -1,21 +1,32 @@
-<ul class="mobile__menus" (click)="onMenuItemClick.emit()">
-    @for (item of menus.routeMenus; track $index) {
-    <li class="mobile__menus--item">
-        <a class="mobile__menus--link" mat-raised-button color="accent" [routerLink]="item.route">{{item.name}}</a>
-    </li>
-    }@empty {
-    <li class="mobile__menus--item">
-        <a class="mobile__menus--link" mat-raised-button color="accent" routerLink="#">No Permission's Menu 😕</a>
-    </li>
-    }
-    @for (item of menus.routeButtons; track $index) {
-    <li class="mobile__menus--item">
-        <a class="mobile__menus--link" mat-raised-button color="accent" [routerLink]="item.route">{{item.name}}</a>
-    </li>
-    }
-    <!-- @empty {
-    <li class="mobile__menus--item">
-        <a class="mobile__menus--link" mat-raised-button color="accent" routerLink="#">No Permission's Button 😕</a>
-    </li>
-    } -->
-</ul>
+<div tabindex="0" class="menus-wrapper">
+    <ul class="mobile__menus" (click)="onMenuItemClick.emit()" >
+        @for (item of menus.routeMenus; track $index) {
+        <li class="mobile__menus--item">
+            <app-button>
+                <a [routerLink]="item.route">{{item.name}}</a>
+            </app-button>
+        </li>
+        }@empty {
+        <li class="mobile__menus--item">
+            <app-button>
+                <a routerLink="#">No Permission's Menu 😕</a>
+            </app-button>
+        </li>
+        }
+    </ul>
+    
+    <ul class="mobile__menus" >
+        @for (item of menus.routeButtons; track $index) {
+            <li class="mobile__menus--item">
+                <app-button>
+                    <a [routerLink]="item.route">{{item.name}}</a>
+                </app-button>
+            </li>
+            }
+            <!-- @empty {
+            <li class="mobile__menus--item">
+                <a routerLink="#">No Permission's Button 😕</a>
+            </li>
+            } -->
+    </ul>
+</div>

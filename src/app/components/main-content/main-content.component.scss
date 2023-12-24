@@ -1,11 +1,7 @@
 .mat-drawer-container{
-    @apply min-h-screen bg-greenish;
+    @apply min-h-screen ;
 }
 
 .mat-drawer{
-    @apply min-h-screen bg-greenish min-w-64;
-}
-
-.mat-drawer-content{
-    @apply min-h-screen bg-greenish;
+    @apply w-3/5;
 }

@@ -1,0 +1,14 @@
+/* :host {
+  --mdc-protected-button-container-color: #b0bec5;
+  --mdc-protected-button-label-text-color: #000;
+  --mat-protected-button-state-layer-color: #000;
+  --mat-protected-button-ripple-color: rgba(0, 0, 0, 0.1);
+}
+ */
+:host {
+    @apply w-full flex items-center;
+}
+
+:host .mat-mdc-raised-button{
+  @apply shadow-none;
+}

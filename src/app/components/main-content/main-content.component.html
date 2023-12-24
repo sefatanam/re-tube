@@ -1,5 +1,5 @@
 <mat-drawer-container class="mat-drawer-container">
-    <mat-drawer mode="over" [opened]="openMenu" class="mat-drawer">
+    <mat-drawer mode="over" [opened]="openMenu" class="mat-drawer" tabindex="0">
         <app-mobile-menus [menus]="menus" (onMenuItemClick)="openMenu=!openMenu"></app-mobile-menus>
     </mat-drawer>
     <mat-drawer-content class="mat-drawer-content">

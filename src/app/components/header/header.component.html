@@ -43,12 +43,11 @@
 <ng-template #routeButtonsContainer>
     @for (routeButton of routeButtons; track $index) {
     <li>
-        <a class="header__options--button" mat-raised-button color="accent"
-            [routerLink]="routeButton.route">{{routeButton.name}}</a>
+        <a mat-raised-button color="accent" [routerLink]="routeButton.route">{{routeButton.name}}</a>
     </li>
     } @empty {
     <li>
-        <a class="header__options--button" mat-raised-button color="accent" routerLink="#">{{emptyMessage}}</a>
+        <a mat-raised-button color="accent" routerLink="#">{{emptyMessage}}</a>
     </li>
     }
 </ng-template>

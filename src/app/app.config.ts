@@ -12,6 +12,7 @@ import {provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideServiceWorker } from '@angular/service-worker';
 import { AuthService } from 'services/auth.service';
+import { provideHotToastConfig } from '@ngneat/hot-toast';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
@@ -25,6 +26,7 @@ export const appConfig: ApplicationConfig = {
         enabled: !isDevMode(),
         registrationStrategy: 'registerWhenStable:30000'
     }),
-    importProvidersFrom(AuthService)
+    importProvidersFrom(AuthService),
+    provideHotToastConfig()
 ],
 };

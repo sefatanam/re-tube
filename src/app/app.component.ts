@@ -9,6 +9,7 @@ import { MenuService } from 'services/menu.service';
 import { RootMenu } from '@typings/menu.type';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { AuthService } from 'services/auth.service';
+import { HotToastService } from '@ngneat/hot-toast';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class AppComponent implements OnInit {
 
   authService = inject(AuthService);
   menuService = inject(MenuService);
+  toastService = inject(HotToastService)
 
   rootMenu: RootMenu = this.menuService.rootMenu;
 
@@ -35,6 +37,9 @@ export class AppComponent implements OnInit {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
+        this.toastService.show(`Welcome back to session ${user.displayName}.`,{
+          position:'bottom-center'
+        })
         this.authService.authUser.set(user)
       } else {
         this.authService.authUser.set(null)

@@ -47,6 +47,9 @@ dependencies:
   '@angular/ssr':
     specifier: ^17.0.0
     version: 17.0.6(@angular/common@17.0.6)(@angular/core@17.0.6)
+  '@ngneat/hot-toast':
+    specifier: ^6.0.2
+    version: 6.0.2(@angular/core@17.0.6)(@ngneat/overview@5.1.1)
   dotenv:
     specifier: ^16.3.1
     version: 16.3.1
@@ -3466,6 +3469,26 @@ packages:
     dependencies:
       '@material/feature-targeting': 15.0.0-canary.a246a4439.0
       '@material/theme': 15.0.0-canary.a246a4439.0
+      tslib: 2.6.2
+    dev: false
+
+  /@ngneat/hot-toast@6.0.2(@angular/core@17.0.6)(@ngneat/overview@5.1.1):
+    resolution: {integrity: sha512-tW57o/p2lDy2LzOIKvvajI+r51VEwr7nnIn6Reg/hN/evSlHDmsq8+UHirnB4dgP/xhY55LxOEjJt2tPZUh94A==}
+    peerDependencies:
+      '@angular/core': '>=16.0.0'
+      '@ngneat/overview': 5.1.1
+    dependencies:
+      '@angular/core': 17.0.6(rxjs@7.8.1)(zone.js@0.14.2)
+      '@ngneat/overview': 5.1.1(@angular/core@17.0.6)
+      tslib: 2.6.2
+    dev: false
+
+  /@ngneat/overview@5.1.1(@angular/core@17.0.6):
+    resolution: {integrity: sha512-Dz7yylhS08Mo+A8SXo7KyJBJMxD18Oq/G5v/ndvd5C8Gi3uOrAiXUjxvqRCPMxrg03FlkvEsD5/4TvMKtrUfAQ==}
+    peerDependencies:
+      '@angular/core': '>=16'
+    dependencies:
+      '@angular/core': 17.0.6(rxjs@7.8.1)(zone.js@0.14.2)
       tslib: 2.6.2
     dev: false
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment.dev';
@@ -24,7 +24,8 @@ export class AppComponent implements OnInit {
 
   authService = inject(AuthService);
   menuService = inject(MenuService);
-  toastService = inject(HotToastService)
+  toastService = inject(HotToastService);
+  router = inject(Router);
 
   rootMenu: RootMenu = this.menuService.rootMenu;
 
@@ -38,7 +39,8 @@ export class AppComponent implements OnInit {
     onAuthStateChanged(auth, (user) => {
       console.log(user)
       if (user) {
-        this.authService.authUser.set(user)
+        this.authService.authUser.set(user);
+        this.router.navigateByUrl('/');
       } else {
         this.authService.authUser.set(null)
       }

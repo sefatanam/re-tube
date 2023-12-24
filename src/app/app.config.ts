@@ -8,11 +8,13 @@ import { environment } from '../environments/environment.dev';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { provideAuth, getAuth } from '@angular/fire/auth';
-import {provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideServiceWorker } from '@angular/service-worker';
 import { AuthService } from 'services/auth.service';
 import { provideHotToastConfig } from '@ngneat/hot-toast';
+import { PlatformModule } from '@angular/cdk/platform';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
@@ -23,10 +25,11 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(provideFirestore(() => getFirestore())),
     provideAnimations(),
     provideServiceWorker('ngsw-worker.js', {
-        enabled: !isDevMode(),
-        registrationStrategy: 'registerWhenStable:30000'
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000'
     }),
     importProvidersFrom(AuthService),
-    provideHotToastConfig()
-],
+    provideHotToastConfig(),
+    importProvidersFrom(PlatformModule)
+  ],
 };

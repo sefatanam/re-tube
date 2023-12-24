@@ -1,0 +1,19 @@
+.continue{
+    &-wrapper{
+        @apply h-screen flex flex-col items-center justify-center gap-4 -mt-40 relative;
+    }
+
+    &-title{
+        @apply text-4xl font-semibold;
+    }
+
+    &-button{
+        @apply flex items-center gap-4;
+        img{
+            @apply h-6 w-6 object-cover overflow-hidden;
+        }
+        span{
+            @apply font-semibold;
+        }
+    }
+}

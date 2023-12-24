@@ -36,10 +36,8 @@ export class AppComponent implements OnInit {
     this.items$ = collectionData(aCollection);
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
+      console.log(user)
       if (user) {
-        this.toastService.show(`Welcome back to session ${user.displayName}.`,{
-          position:'bottom-center'
-        })
         this.authService.authUser.set(user)
       } else {
         this.authService.authUser.set(null)

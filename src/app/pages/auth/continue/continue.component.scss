@@ -1,6 +1,6 @@
 .continue{
     &-wrapper{
-        @apply h-screen flex flex-col  justify-center gap-4  relative;
+        @apply flex flex-col items-center justify-center gap-4 py-20 relative;
     }
 
     &-title{

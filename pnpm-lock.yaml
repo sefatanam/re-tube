@@ -21,8 +21,8 @@ dependencies:
     specifier: ^17.0.0
     version: 17.0.6(rxjs@7.8.1)(zone.js@0.14.2)
   '@angular/fire':
-    specifier: 17.0.0-next.0
-    version: 17.0.0-next.0(@angular/common@17.0.6)(@angular/core@17.0.6)(@angular/platform-browser-dynamic@17.0.6)(@angular/platform-browser@17.0.6)(rxjs@7.8.1)
+    specifier: 17.0.0
+    version: 17.0.0(@angular/common@17.0.6)(@angular/core@17.0.6)(@angular/platform-browser-dynamic@17.0.6)(@angular/platform-browser@17.0.6)(rxjs@7.8.1)
   '@angular/forms':
     specifier: ^17.0.0
     version: 17.0.6(@angular/common@17.0.6)(@angular/core@17.0.6)(@angular/platform-browser@17.0.6)(rxjs@7.8.1)
@@ -50,9 +50,6 @@ dependencies:
   '@ngneat/hot-toast':
     specifier: ^6.0.2
     version: 6.0.2(@angular/core@17.0.6)(@ngneat/overview@5.1.1)
-  dotenv:
-    specifier: ^16.3.1
-    version: 16.3.1
   express:
     specifier: ^4.18.2
     version: 4.18.2
@@ -424,13 +421,13 @@ packages:
       tslib: 2.6.2
       zone.js: 0.14.2
 
-  /@angular/fire@17.0.0-next.0(@angular/common@17.0.6)(@angular/core@17.0.6)(@angular/platform-browser-dynamic@17.0.6)(@angular/platform-browser@17.0.6)(rxjs@7.8.1):
-    resolution: {integrity: sha512-iUyHbYoQqTd029QiYZWnqjuPvOUeyM6PlpWb00rhXZnSNmf0r9U8UHZuB3AIDByyp/XXugw4NR6iWPbaAP1Zbg==}
+  /@angular/fire@17.0.0(@angular/common@17.0.6)(@angular/core@17.0.6)(@angular/platform-browser-dynamic@17.0.6)(@angular/platform-browser@17.0.6)(rxjs@7.8.1):
+    resolution: {integrity: sha512-sv9OExC87Lgac5pYuD97LMjetEk2xwrCtqedzK49CAc5T6B3vPu9ncZS+uypDFp9bmY4Wp4Du0RzeiYO2aIUjA==}
     peerDependencies:
-      '@angular/common': ^17.0.0-next.0
-      '@angular/core': ^17.0.0-next.0
-      '@angular/platform-browser': ^17.0.0-next.0
-      '@angular/platform-browser-dynamic': ^17.0.0-next.0
+      '@angular/common': ^17.0.0
+      '@angular/core': ^17.0.0
+      '@angular/platform-browser': ^17.0.0
+      '@angular/platform-browser-dynamic': ^17.0.0
       firebase-tools: ^12.0.0
       rxjs: ~7.8.0
     peerDependenciesMeta:
@@ -5048,11 +5045,6 @@ packages:
       dom-serializer: 2.0.0
       domelementtype: 2.3.0
       domhandler: 5.0.3
-
-  /dotenv@16.3.1:
-    resolution: {integrity: sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==}
-    engines: {node: '>=12'}
-    dev: false
 
   /eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}

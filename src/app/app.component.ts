@@ -37,8 +37,10 @@ export class AppComponent implements OnInit {
     this.items$ = collectionData(aCollection);
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
+      console.log(user)
       if (user) {
         this.authService.authUser.set(user);
+        this.router.navigateByUrl('/');
       } else {
         this.authService.authUser.set(null)
       }

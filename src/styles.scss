@@ -8,6 +8,8 @@
   --black:#191919;
   --gray:#e7e7e7;
   --white:#fff;
+  --black:#000;
+  --mdc-outlined-text-field-focus-label-text-color: var(--primary-accent)
 }
 /* You can add global styles to this file, and also import other style files */
 @import 'tailwindcss/base';
@@ -15,7 +17,7 @@
 @import 'tailwindcss/utilities';
 @include mat.core();
 
-$my-primary: mat.define-palette(mat.$blue-grey-palette, A200, A100, A400);
+$my-primary: mat.define-palette(mat.$blue-grey-palette);
 $my-accent: mat.define-palette(mat.$blue-grey-palette, A200, A100, A400);
 
 $my-theme: mat.define-light-theme((
@@ -24,11 +26,23 @@ $my-theme: mat.define-light-theme((
    accent: $my-accent,
  ),
  typography: mat.define-typography-config(),
- density: 0,
+ density: 1,
 ));
 
 @include mat.all-component-themes($my-theme);
 html, body { height: 100%; }
 body{
     font-family: 'SF Pro Display', system-ui, sans-serif;
+}
+
+.mat-mdc-form-field{
+  display: block !important;
+}
+.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field .mdc-notched-outline__notch {
+  border-right-style: hidden;
+}
+
+.mat-mdc-form-field-subscript-wrapper,
+.mat-mdc-form-field-hint-wrapper, .mat-mdc-form-field-error-wrapper{
+ padding: 0 !important;
 }

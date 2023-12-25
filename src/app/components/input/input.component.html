@@ -1,0 +1,17 @@
+<mat-form-field appearance="outline">
+    <mat-label>{{label}}</mat-label>
+    <input matInput [type]="type" [(ngModel)]="value" (input)="setValue($event)" [placeholder]="placeholder"
+        (blur)="onTouched()">
+    @if (formControl.touched && formControl.errors) {
+    <mat-hint class="error">
+        <ng-container *ngIf="formControl.errors['required']"> This field is required. </ng-container>
+        <ng-container *ngIf="formControl.errors['email']">   Invalid email format. </ng-container>
+        <ng-container *ngIf="formControl.errors['pattern']">   Invalid input format. </ng-container>
+        <ng-container *ngIf="formControl.errors['min']">  Input must be greater than or equal to   {{ formControl.errors['min']!.min }}.  </ng-container>
+        <ng-container *ngIf="formControl.errors['max']">  Input must be less than or equal to {{ formControl.errors['max']!.max }}.   </ng-container>
+        <ng-container *ngIf="formControl.errors['minlength']"> Input must have a minimum length of  {{ formControl.errors['minlength']['requiredLength'] }} characters. </ng-container>
+        <ng-container *ngIf="formControl.errors['maxlength']">   Input must have a maximum length of    {{ formControl.errors['maxlength']['requiredLength'] }} characters. </ng-container>
+    </mat-hint>
+    }
+
+</mat-form-field>

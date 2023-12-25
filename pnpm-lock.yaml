@@ -21,8 +21,8 @@ dependencies:
     specifier: ^17.0.0
     version: 17.0.6(rxjs@7.8.1)(zone.js@0.14.2)
   '@angular/fire':
-    specifier: ^17.0.0
-    version: 17.0.0(@angular/common@17.0.6)(@angular/core@17.0.6)(@angular/platform-browser-dynamic@17.0.6)(@angular/platform-browser@17.0.6)(rxjs@7.8.1)
+    specifier: 17.0.0-next.0
+    version: 17.0.0-next.0(@angular/common@17.0.6)(@angular/core@17.0.6)(@angular/platform-browser-dynamic@17.0.6)(@angular/platform-browser@17.0.6)(rxjs@7.8.1)
   '@angular/forms':
     specifier: ^17.0.0
     version: 17.0.6(@angular/common@17.0.6)(@angular/core@17.0.6)(@angular/platform-browser@17.0.6)(rxjs@7.8.1)
@@ -424,13 +424,13 @@ packages:
       tslib: 2.6.2
       zone.js: 0.14.2
 
-  /@angular/fire@17.0.0(@angular/common@17.0.6)(@angular/core@17.0.6)(@angular/platform-browser-dynamic@17.0.6)(@angular/platform-browser@17.0.6)(rxjs@7.8.1):
-    resolution: {integrity: sha512-sv9OExC87Lgac5pYuD97LMjetEk2xwrCtqedzK49CAc5T6B3vPu9ncZS+uypDFp9bmY4Wp4Du0RzeiYO2aIUjA==}
+  /@angular/fire@17.0.0-next.0(@angular/common@17.0.6)(@angular/core@17.0.6)(@angular/platform-browser-dynamic@17.0.6)(@angular/platform-browser@17.0.6)(rxjs@7.8.1):
+    resolution: {integrity: sha512-iUyHbYoQqTd029QiYZWnqjuPvOUeyM6PlpWb00rhXZnSNmf0r9U8UHZuB3AIDByyp/XXugw4NR6iWPbaAP1Zbg==}
     peerDependencies:
-      '@angular/common': ^17.0.0
-      '@angular/core': ^17.0.0
-      '@angular/platform-browser': ^17.0.0
-      '@angular/platform-browser-dynamic': ^17.0.0
+      '@angular/common': ^17.0.0-next.0
+      '@angular/core': ^17.0.0-next.0
+      '@angular/platform-browser': ^17.0.0-next.0
+      '@angular/platform-browser-dynamic': ^17.0.0-next.0
       firebase-tools: ^12.0.0
       rxjs: ~7.8.0
     peerDependenciesMeta:

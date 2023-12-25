@@ -1,12 +1,13 @@
 <section class="player-wrapper">
     <div class="player-src">
         <!-- <iframe width="100%" height="100%" src="https://www.youtube.com/embed/zXiQZkrJFnA"></iframe> -->
-        <iframe width="100%" height="100%" [src]="safeURL" allowfullscreen="allowfullscreen"
+        <iframe *ngIf="safeURL" width="100%" height="100%" [src]="safeURL" allowfullscreen="allowfullscreen"
             mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen"
             oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>
     </div>
     <div class="player-info">
-        <h4 class="player-info-title">Obito Uchiha [AMV] - Another Love | Naruto Shippuden</h4>
+        <h4 class="player-info-title">{{currentVideoInfo.title}}</h4>
+        <ng-container *ngTemplateOutlet="limited_accordion"></ng-container>
     </div>
     <div class="player-list-wrapper">
         <mat-accordion>
@@ -21,13 +22,69 @@
                 </mat-expansion-panel-header>
                 <div class="player-list-container">
                     <ul class="player-list-items">
-                        <li class="player-list-item active">
-                            <img [src]="'https://img.youtube.com/vi/'+videoId+'/default.jpg'">
-                            <p>Obito Uchiha [AMV] - Another Love | Naruto Shippuden</p>
+                        @if (videoInfos$|async) {
+                        @for (item of (videoInfos$ | async); track $index) {
+                        <li class="player-list-item" [class.active]="item.videoId===currentVideoInfo.videoId">
+                            <img
+                                [src]="sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/'+item.videoId+'/default.jpg')">
+                            <p>{{item.title}}</p>
                         </li>
+                        }@empty {
+                        <li>
+                            <p>No Videos Found</p>
+                        </li>
+                        }
+                        } @else {
+                        <li>
+                            <p>Loading...</p>
+                        </li>
+                        }
+
                     </ul>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>
+        <!-- <div class="limited-feature-web">
+            <ng-container *ngTemplateOutlet="limited_feature"></ng-container>
+        </div> -->
     </div>
+    <!-- <div class="limited-feature-phone"> -->
+    <!-- <ng-container *ngTemplateOutlet="limited_feature"></ng-container> -->
+    <!-- </div> -->
 </section>
+
+
+<ng-template #limited_accordion>
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <p class="accordion-title">
+                    @if (!authService.authUser()) {
+                    Unlock a feature by login
+                    }@else {
+                    You can add any of your favourite video
+                    }
+                </p>
+            </mat-expansion-panel-header>
+            @if(authService.authUser()){
+            <ng-container *ngTemplateOutlet="limited_feature"></ng-container>
+            }
+        </mat-expansion-panel>
+    </mat-accordion>
+</ng-template>
+
+
+<ng-template #limited_feature>
+    <div class="player-limited">
+        <p class="player-limited-text">There will be more feature's are comming soon!</p>
+        <!-- <h4 class="player-limited-title">You can add any of your favourite video</h4> -->
+        @if(magicForm){
+        <form [formGroup]="magicForm" data-cy="form-group" class="player-limited-form" (ngSubmit)="submit()">
+            <app-input formControlName="title" placeholder="Naruto Shippuden" label="Title" data-cy="title"></app-input>
+            <app-input formControlName="videoId" placeholder="https://youtu.be/8ofCZObsnOo?list=RDgW2hE-DRx7Q"
+                label="Youtube Video link" data-cy="videoId"></app-input>
+            <button mat-raised-button type="submit" color="accent" [disabled]="magicForm.invalid"> Submit</button>
+        </form>
+        }
+    </div>
+</ng-template>

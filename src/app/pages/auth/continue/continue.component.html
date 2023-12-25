@@ -1,12 +1,26 @@
 <section class="continue-wrapper">
     <h1 class="continue-title">Get Started, Now !</h1>
+
+    @if (!authService.authUser()) {
     <div>
         <app-button>
             <div class="continue-button" (click)="login()">
-                <img src="https://static-00.iconduck.com/assets.00/google-icon-2048x2048-czn3g8x8.png" alt="Google Icon">
+                <img src="https://static-00.iconduck.com/assets.00/google-icon-2048x2048-czn3g8x8.png"
+                    alt="Google Icon">
                 <span>Continue with Google</span>
             </div>
         </app-button>
     </div>
-    <p class="hidden md:block italic text-sm fixed bottom-0 right-0">Currently we support Google authentication.<br> Other provider will be available soon. 🙂</p>
+    }@else {
+    <div>
+        <app-button>
+            <div routerLink="/player">
+
+                <span>Go To Player</span>
+            </div>
+        </app-button>
+    </div>
+    }
+    <p class="hidden md:block italic text-sm fixed bottom-0 right-0">Currently we support Google authentication.<br>
+        Other provider will be available soon. 🙂</p>
 </section>

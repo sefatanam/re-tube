@@ -1,99 +1,129 @@
 @import "../../../styles/media.scss";
 
-.accordion-title{
-    @apply font-semibold;
+.accordion-title {
+  @apply font-semibold;
 }
 
 :host mat-expansion-panel {
-    --mat-expansion-container-shape:0.75rem;
+  --mat-expansion-container-shape: 0.75rem;
 }
 
 @include for-phone {
   .player {
-    &-wrapper{
-        @apply grid p-4 gap-4;
+    &-wrapper {
+      @apply grid p-4 gap-4;
     }
     &-src {
       @apply w-full h-72 rounded-xl overflow-hidden;
     }
-    &-info{
-        &-title{
-            @apply font-semibold;
-        }
+    &-info {
+      @apply grid gap-4;
+      &-title {
+        @apply font-semibold;
+      }
     }
-    &-list{
-        &-wrapper{
-            @apply grid;
+    &-list {
+      &-wrapper {
+        @apply grid;
+      }
+
+      &-container {
+        @apply grid;
+      }
+
+      &-items {
+        @apply grid gap-2;
+      }
+
+      &-item {
+        @apply flex items-start gap-2 p-2 rounded cursor-pointer;
+        img {
+          @apply h-20 w-32 rounded overflow-hidden object-cover;
         }
 
-        &-container{
-            @apply grid;
+        p {
+          @apply font-sans;
         }
 
-        &-items{
-            @apply grid gap-2;
+        &.active {
+          @apply bg-gray;
         }
-
-        &-item{
-            @apply flex items-start gap-2 p-2 rounded;
-            img{
-                @apply h-20 w-32 rounded overflow-hidden object-cover;
-            }
-
-            p{
-                @apply font-sans;
-            }
-
-            &.active{
-                @apply bg-gray;
-            }
-        }
+      }
     }
   }
 }
 
+@include for-web {
+  .player {
+    &-wrapper {
+      @apply grid p-4 gap-4 grid-cols-12 grid-rows-12;
+    }
+    &-src {
+      @apply w-full h-[31rem] rounded-xl overflow-hidden col-start-1 col-end-8;
+    }
+    &-info {
+      @apply row-start-2 col-start-1 col-end-8;
+      &-title {
+        @apply font-semibold text-3xl pb-8;
+      }
+    }
+    &-list {
+      &-wrapper {
+        @apply grid col-start-8 col-end-13;
+      }
 
-@include for-web{
-    .player {
-        &-wrapper{
-            @apply grid p-4 gap-4 grid-cols-12 grid-rows-12;
+      &-container {
+        @apply grid;
+      }
+
+      &-items {
+        @apply grid gap-2;
+      }
+
+      &-item {
+        @apply flex items-start gap-2 p-2 rounded cursor-pointer  hover:bg-gray;
+        img {
+          @apply h-20 w-32 rounded overflow-hidden object-cover;
         }
-        &-src {
-          @apply w-full h-[31rem] rounded-xl overflow-hidden col-start-1 col-end-8 ;
+
+        p {
+          @apply font-sans;
         }
-        &-info{
-            @apply row-start-2 col-start-1 col-end-8;
-            &-title{
-                @apply font-semibold text-3xl;
-            }
-        }
-        &-list{
-            &-wrapper{
-                @apply grid col-start-8 col-end-12;
-            }
-    
-            &-container{
-                @apply grid;
-            }
-    
-            &-items{
-                @apply grid gap-2;
-            }
-    
-            &-item{
-                @apply flex items-start gap-2 p-2 rounded;
-                img{
-                    @apply h-20 w-32 rounded overflow-hidden object-cover;
-                }
-    
-                p{
-                    @apply font-sans;
-                }
-    
-                &.active{
-                    @apply bg-gray;
-                }
-            }
+
+        &.active {
+          @apply bg-gray;
         }
       }
+    }
+  }
+}
+
+// Temporary
+
+.player-limited {
+  @apply grid gap-4 row-start-2 mt-10;
+
+  &-text {
+    @apply text-xs italic;
+  }
+
+  &-title {
+    @apply font-semibold;
+  }
+
+  form {
+    @apply grid gap-2;
+  }
+}
+
+@include for-web {
+  .player-limited {
+    @apply bg-greenish rounded-xl p-4 w-2/3;
+
+    form {
+      button {
+        @apply w-1/5;
+      }
+    }
+  }
 }

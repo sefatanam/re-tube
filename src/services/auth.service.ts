@@ -24,7 +24,6 @@ export class AuthService {
       } else {
         this.inWebSignInWithPopUp(auth)
       }
-      this.router.navigateByUrl('/player')
     }).catch((err) => {
       console.error(err);
       this.toastService.error(`Something went wrong`, { position: 'bottom-center' })
@@ -52,6 +51,7 @@ export class AuthService {
         // const token = credential!.accessToken;
         const user = result.user;
         this.authUser.set(user);
+        this.router.navigateByUrl('/player')
       }).catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
@@ -74,6 +74,7 @@ export class AuthService {
         // const token = credential!.accessToken;
         const user = result.user;
         this.authUser.set(user);
+        this.router.navigateByUrl('/player')
       }).catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;

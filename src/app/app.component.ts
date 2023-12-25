@@ -7,7 +7,9 @@ import { MenuService } from 'services/menu.service';
 import { RootMenu } from '@typings/menu.type';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { AuthService } from 'services/auth.service';
+import { initializeApp } from 'firebase/app';
 
+initializeApp(environment.firebaseConfig);
 
 @Component({
   selector: 'app-root',

@@ -24,6 +24,7 @@ export class AuthService {
       } else {
         this.inWebSignInWithPopUp(auth)
       }
+      this.router.navigateByUrl('/player')
     }).catch((err) => {
       console.error(err);
       this.toastService.error(`Something went wrong`, { position: 'bottom-center' })

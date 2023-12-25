@@ -140,4 +140,10 @@ export class PlayerComponent implements OnInit {
   makeVideoSafeUrl(videoId: string) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${videoId}`)
   }
+
+
+  setCurrentVideo(videInfo: VideoInfo) {
+    this.currentVideoInfo = videInfo;
+    this.safeURL = this.makeVideoSafeUrl(this.currentVideoInfo.videoId)
+  }
 }

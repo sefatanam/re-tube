@@ -16,7 +16,7 @@
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         <p class="accordion-title">
-                            Naruto Shippuden AMV playlist
+                            Public playlist
                         </p>
                     </mat-panel-title>
                 </mat-expansion-panel-header>
@@ -24,7 +24,8 @@
                     <ul class="player-list-items">
                         @if (videoInfos$|async) {
                         @for (item of (videoInfos$ | async); track $index) {
-                        <li class="player-list-item" [class.active]="item.videoId===currentVideoInfo.videoId">
+                        <li class="player-list-item" [class.active]="item.videoId===currentVideoInfo.videoId"
+                            (click)="setCurrentVideo(item)">
                             <img
                                 [src]="sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/'+item.videoId+'/default.jpg')">
                             <p>{{item.title}}</p>
@@ -76,7 +77,7 @@
 
 <ng-template #limited_feature>
     <div class="player-limited">
-        <p class="player-limited-text">There will be more feature's are comming soon!</p>
+        <p class="player-limited-text">More feature's are comming soon!</p>
         <!-- <h4 class="player-limited-title">You can add any of your favourite video</h4> -->
         @if(magicForm){
         <form [formGroup]="magicForm" data-cy="form-group" class="player-limited-form" (ngSubmit)="submit()">

@@ -1,7 +1,9 @@
-.mat-drawer-container{
-    @apply min-h-screen container mx-auto bg-white;
+.mat-drawer-container {
+  background: transparent;
+
+  @apply min-h-screen container mx-auto;
 }
 
-.mat-drawer{
-    @apply w-3/5;
+.mat-drawer {
+  @apply w-3/5;
 }

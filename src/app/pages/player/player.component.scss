@@ -38,11 +38,11 @@
       &-item {
         @apply flex items-start gap-2 p-2 rounded cursor-pointer;
         img {
-          @apply h-20 w-32 rounded overflow-hidden object-cover;
+          @apply h-[80px] w-[125px] rounded overflow-hidden object-cover;
         }
 
         p {
-          @apply font-sans;
+          @apply font-sans flex-1;
         }
 
         &.active {
@@ -56,7 +56,7 @@
 @include for-web {
   .player {
     &-wrapper {
-      @apply grid p-4 gap-4 grid-cols-12 grid-rows-12;
+      @apply grid p-4 gap-4 grid-cols-12;
     }
     &-src {
       @apply w-full h-[31rem] rounded-xl overflow-hidden col-start-1 col-end-8;
@@ -83,11 +83,11 @@
       &-item {
         @apply flex items-start gap-2 p-2 rounded cursor-pointer  hover:bg-gray;
         img {
-          @apply h-20 w-32 rounded overflow-hidden object-cover;
+          @apply h-[80px] w-[125px] rounded overflow-hidden object-cover;
         }
 
         p {
-          @apply font-sans;
+          @apply font-sans flex-1;
         }
 
         &.active {

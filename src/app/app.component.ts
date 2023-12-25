@@ -39,7 +39,6 @@ export class AppComponent implements OnInit {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         this.authService.authUser.set(user);
-        this.router.navigateByUrl('/login')
       } else {
         this.authService.authUser.set(null)
       }

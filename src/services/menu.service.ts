@@ -25,7 +25,7 @@ export class MenuService {
 
   private routeButtons: Menu[] = [
     {
-      name: 'What is Re-Learn?',
+      name: 'What is Re.Learn?',
       route: '/'
     },
     {

@@ -32,6 +32,7 @@ export class HeaderComponent {
       const theme = window.localStorage.getItem('theme') ?? 'light';
       window.document.querySelector('body')?.classList.add(theme);
       this.isDarkThemeEnable = theme === 'dark';
+      console.log(theme)
     })
   }
 

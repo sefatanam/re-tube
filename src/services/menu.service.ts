@@ -9,6 +9,10 @@ export class MenuService {
 
   private routeMenus: Menu[] = [
     {
+      name: 'What is Re-Learn?',
+      route: '/'
+    },
+    {
       name: 'Player',
       route: '/player'
     },
@@ -24,10 +28,6 @@ export class MenuService {
 
 
   private routeButtons: Menu[] = [
-    {
-      name: 'What is Re-Learn?',
-      route: '/'
-    },
     {
       name: 'Login',
       route: '/login'

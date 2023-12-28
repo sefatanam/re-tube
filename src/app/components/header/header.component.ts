@@ -1,5 +1,5 @@
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { Component, EventEmitter, Input, Output, inject, signal } from '@angular/core';
+import { Component, EventEmitter, Input, Output, afterNextRender, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { Menu } from '@typings/menu.type';
@@ -27,6 +27,14 @@ export class HeaderComponent {
 
   document = inject(DOCUMENT);
 
+  constructor() {
+    afterNextRender(() => {
+      const theme = window.localStorage.getItem('theme') ?? 'light';
+      window.document.querySelector('body')?.classList.add(theme);
+      this.isDarkThemeEnable = theme === 'dark';
+    })
+  }
+
   kickOut = () => this.authService.signOut();
   toggleTheme() {
     this.isDarkThemeEnable = !this.isDarkThemeEnable;
@@ -37,8 +45,6 @@ export class HeaderComponent {
       this.document.querySelector('body')?.classList.remove('dark')
       this.document.querySelector('body')?.classList.add('light')
     }
-
     window.localStorage.setItem('theme', this.isDarkThemeEnable ? 'dark' : 'light')
-
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, afterNextRender, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { environment } from '../environments/environment.dev';
@@ -25,13 +25,6 @@ export class AppComponent implements OnInit {
   menuService = inject(MenuService);
 
   rootMenu: RootMenu = this.menuService.rootMenu;
-
-  constructor() {
-    afterNextRender(() => {
-      const theme = window.localStorage.getItem('theme') ?? 'light';
-      window.document.querySelector('body')?.classList.add(theme)
-    })
-  }
 
   ngOnInit(): void {
     const auth = getAuth();

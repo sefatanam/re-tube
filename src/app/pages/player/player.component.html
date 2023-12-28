@@ -9,50 +9,15 @@
         <h4 class="player-info-title">{{currentVideoInfo.title}}</h4>
         <ng-container *ngTemplateOutlet="limited_accordion"></ng-container>
     </div>
-    <div class="player-list-wrapper">
-        <mat-accordion>
-            <mat-expansion-panel (opened)="panelOpenState = true" [expanded]="panelOpenState"
-                (closed)="panelOpenState = false">
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        <p class="accordion-title">
-                            Public playlist
-                        </p>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <div class="player-list-container">
-                    <ul class="player-list-items">
-                        @if (videoInfos$|async) {
-                        @for (item of (videoInfos$ | async); track $index) {
-                        <li class="player-list-item" [class.active]="item.videoId===currentVideoInfo.videoId"
-                            (click)="setCurrentVideo(item)">
-                            <img
-                                [src]="sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/'+item.videoId+'/default.jpg')">
-                            <p>{{item.title}}</p>
-                        </li>
-                        }@empty {
-                        <li>
-                            <p>No Videos Found</p>
-                        </li>
-                        }
-                        } @else {
-                        <li>
-                            <p>Loading...</p>
-                        </li>
-                        }
 
-                    </ul>
-                </div>
-            </mat-expansion-panel>
-        </mat-accordion>
-        <!-- <div class="limited-feature-web">
-            <ng-container *ngTemplateOutlet="limited_feature"></ng-container>
-        </div> -->
+    <div class="player-list-wrapper phone">
+        <ng-container *ngTemplateOutlet="player_playlist"></ng-container>
     </div>
-    <!-- <div class="limited-feature-phone"> -->
-    <!-- <ng-container *ngTemplateOutlet="limited_feature"></ng-container> -->
-    <!-- </div> -->
 </section>
+
+<div class="player-list-wrapper web">
+    <ng-container *ngTemplateOutlet="player_playlist"></ng-container>
+</div>
 
 
 <ng-template #limited_accordion>
@@ -88,4 +53,43 @@
         </form>
         }
     </div>
+</ng-template>
+
+
+<ng-template #player_playlist>
+    <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenState = true" [expanded]="panelOpenState"
+            (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <p class="accordion-title">
+                        Public playlist
+                    </p>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="player-list-container">
+                <ul class="player-list-items">
+                    @if (videoInfos$|async) {
+                    @for (item of (videoInfos$ | async); track $index) {
+                    <li class="player-list-item" [class.active]="item.videoId===currentVideoInfo.videoId"
+                        (click)="setCurrentVideo(item)">
+                        <img
+                            [src]="sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/'+item.videoId+'/default.jpg')">
+                        <p>{{item.title}}</p>
+                    </li>
+                    }@empty {
+                    <li>
+                        <p>No Videos Found</p>
+                    </li>
+                    }
+                    } @else {
+                    <li>
+                        <p>Loading...</p>
+                    </li>
+                    }
+
+                </ul>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
 </ng-template>

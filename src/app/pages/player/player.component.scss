@@ -23,7 +23,7 @@
       }
     }
     &-list {
-      &-wrapper {
+      &-wrapper.phone {
         @apply grid;
       }
 
@@ -54,22 +54,25 @@
 }
 
 @include for-web {
+  :host {
+    @apply flex p-4 gap-4;
+  }
   .player {
     &-wrapper {
-      @apply grid p-4 gap-4 grid-cols-12;
+      @apply w-2/3;
     }
     &-src {
-      @apply w-full h-[31rem] rounded-xl overflow-hidden col-start-1 col-end-8;
+      @apply w-full h-[31rem] rounded-xl overflow-hidden;
     }
     &-info {
-      @apply row-start-2 col-start-1 col-end-8;
+      @apply flex flex-col gap-4 pt-4;
       &-title {
         @apply font-semibold text-3xl pb-8;
       }
     }
     &-list {
-      &-wrapper {
-        @apply grid col-start-8 col-end-13;
+      &-wrapper.phone {
+        @apply hidden;
       }
 
       &-container {
@@ -102,15 +105,12 @@
 
 .player-limited {
   @apply grid gap-4 row-start-2 mt-10;
-
   &-text {
     @apply text-xs italic;
   }
-
   &-title {
     @apply font-semibold;
   }
-
   form {
     @apply grid gap-2;
   }
@@ -119,7 +119,6 @@
 @include for-web {
   .player-limited {
     @apply bg-greenish rounded-xl p-4 w-2/3;
-
     form {
       button {
         @apply w-1/5;

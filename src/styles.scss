@@ -38,10 +38,7 @@ $dark-theme: mat.define-dark-theme(
     color: (
       primary: $my-primary-dark,
       accent: $my-accent-dark,
-      warn: $my-warn-dark,
     ),
-    typography: mat.define-typography-config(),
-    density: 1,
   )
 );
 

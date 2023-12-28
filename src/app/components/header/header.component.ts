@@ -25,7 +25,7 @@ export class HeaderComponent {
 
   emptyMessage = 'Nothing Found. 😬';
 
-  document = inject(DOCUMENT)
+  document = inject(DOCUMENT);
 
   kickOut = () => this.authService.signOut();
   toggleTheme() {
@@ -37,6 +37,8 @@ export class HeaderComponent {
       this.document.querySelector('body')?.classList.remove('dark')
       this.document.querySelector('body')?.classList.add('light')
     }
+
+    window.localStorage.setItem('theme', this.isDarkThemeEnable ? 'dark' : 'light')
 
   }
 }

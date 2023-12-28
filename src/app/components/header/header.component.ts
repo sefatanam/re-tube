@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { Component, EventEmitter, Input, Output, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
@@ -15,6 +15,8 @@ import { AuthService } from 'services/auth.service';
   imports: [CommonModule, RouterLink, MatButtonModule, ButtonComponent]
 })
 export class HeaderComponent {
+  isDarkThemeEnable: boolean = false;
+
   authService = inject(AuthService)
   @Input() user = signal<User | null>(null);
   @Input() routeButtons: Menu[] = []
@@ -23,6 +25,18 @@ export class HeaderComponent {
 
   emptyMessage = 'Nothing Found. 😬';
 
+  document = inject(DOCUMENT)
 
-  kickOut = () => this.authService.signOut()
+  kickOut = () => this.authService.signOut();
+  toggleTheme() {
+    this.isDarkThemeEnable = !this.isDarkThemeEnable;
+    if (this.isDarkThemeEnable) {
+      this.document.querySelector('body')?.classList.remove('light')
+      this.document.querySelector('body')?.classList.add('dark')
+    } else {
+      this.document.querySelector('body')?.classList.remove('dark')
+      this.document.querySelector('body')?.classList.add('light')
+    }
+
+  }
 }

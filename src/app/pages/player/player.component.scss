@@ -84,17 +84,17 @@
       }
 
       &-item {
-        @apply flex items-start gap-2 p-2 rounded cursor-pointer  hover:bg-gray;
+        @apply flex items-start gap-2 p-2 rounded cursor-pointer  hover:bg-gray hover:dark:bg-black;
         img {
           @apply h-[80px] w-[125px] rounded overflow-hidden object-cover;
         }
 
         p {
-          @apply font-sans flex-1;
+          @apply font-sans flex-1 text-black dark:text-white;
         }
 
         &.active {
-          @apply bg-gray;
+          @apply bg-gray dark:bg-black;
         }
       }
     }
@@ -118,7 +118,7 @@
 
 @include for-web {
   .player-limited {
-    @apply bg-greenish rounded-xl p-4 w-2/3;
+    @apply bg-greenish dark:bg-black rounded-xl p-4 w-2/3;
     form {
       button {
         @apply w-1/5;

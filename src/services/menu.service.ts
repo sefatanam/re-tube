@@ -9,7 +9,7 @@ export class MenuService {
 
   private routeMenus: Menu[] = [
     {
-      name: 'What is Re-Learn?',
+      name: 'What is Re-tube?',
       route: '/'
     },
     {

@@ -6,6 +6,7 @@ import { Menu } from '@typings/menu.type';
 import { ButtonComponent } from "../button/button.component";
 import { User } from 'firebase/auth';
 import { AuthService } from 'services/auth.service';
+import { environment } from 'environments/environment.dev';
 
 @Component({
   selector: 'app-header',
@@ -16,6 +17,7 @@ import { AuthService } from 'services/auth.service';
 })
 export class HeaderComponent {
   isDarkThemeEnable: boolean = false;
+  env = environment;
 
   authService = inject(AuthService)
   @Input() user = signal<User | null>(null);

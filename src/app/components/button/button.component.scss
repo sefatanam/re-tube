@@ -6,9 +6,15 @@
 }
  */
 :host {
-    @apply w-full flex items-center;
+  @apply w-full flex items-center;
 }
 
-:host .mat-mdc-raised-button{
+:host .mat-mdc-raised-button {
   @apply shadow-none;
+}
+
+::ng-deep .mdc-button__label {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px;
 }

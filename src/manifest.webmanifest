@@ -1,13 +1,13 @@
 {
-  "name": "Re-Learn",
-  "short_name": "Re-Learn",
+  "name": "Re Tube",
+  "short_name": "Re Tube",
   "theme_color": "#DEE8E0",
   "background_color": "#DEE8E0",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
-  "orientation":"portrait",
-  "description":"Re.Learn: Empowering your education journey with seamless access to personalized content and interactive tools, all within a user-friendly Progressive Web App (PWA). Explore, discover, and master new knowledge effortlessly with Re.Learn.",
+  "orientation": "portrait",
+  "description": "Empowering users to rediscover, curate, and elevate their streaming experiences. Whether it's videos, podcasts, or live broadcasts, StreamRise offers a dynamic platform to explore, organize, and enjoy multimedia content tailored to your interests.",
   "icons": [
     {
       "src": "assets/icons/any-512x512.png",
@@ -22,19 +22,19 @@
       "purpose": "maskable"
     }
   ],
-  "screenshots":[
+  "screenshots": [
     {
       "src": "assets/screenshots/login.jpeg",
-       "sizes": "540x1103",
-       "type": "image/png",
-       "form_factor": "wide",
-       "label": "Login"
-     },
-     {
+      "sizes": "540x1103",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Login"
+    },
+    {
       "src": "assets/screenshots/player.jpeg",
-       "sizes": "540x1100",
-       "type": "image/jpeg",
-       "label": "Player"
-     }
+      "sizes": "540x1100",
+      "type": "image/jpeg",
+      "label": "Player"
+    }
   ]
 }

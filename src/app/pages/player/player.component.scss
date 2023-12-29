@@ -9,9 +9,20 @@
 }
 
 @include for-phone {
+  :host {
+    @apply grid sticky top-1;
+
+    ::ng-deep
+      .mat-accordion-custom
+      > .mat-expanded
+      > .mat-expansion-panel-content {
+      height: 45vh !important;
+      overflow-y: overlay !important;
+    }
+  }
   .player {
     &-wrapper {
-      @apply grid p-4 gap-4;
+      @apply grid p-4 gap-4 sticky top-1 z-50;
     }
     &-src {
       @apply w-full h-72 rounded-xl overflow-hidden;
@@ -23,14 +34,9 @@
       }
     }
     &-list {
-      &-wrapper.phone {
-        @apply grid;
+      &-wrapper {
+        @apply p-4  -z-50 sticky top-2;
       }
-
-      &-wrapper.web {
-        @apply hidden;
-      }
-
       &-container {
         @apply grid;
       }
@@ -60,6 +66,13 @@
 @include for-web {
   :host {
     @apply flex p-4 gap-4;
+    ::ng-deep
+      .mat-accordion-custom
+      > .mat-expanded
+      > .mat-expansion-panel-content {
+      height: 85vh !important;
+      overflow-y: overlay !important;
+    }
   }
   .player {
     &-wrapper {
@@ -75,9 +88,6 @@
       }
     }
     &-list {
-      &-wrapper.phone {
-        @apply hidden;
-      }
       &-container {
         @apply grid;
       }

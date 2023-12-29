@@ -1,7 +1,7 @@
 @import "../../../styles/media.scss";
 
 @mixin header-common {
-  @apply border-b-2 border-b-gray p-4;
+  @apply border-b border-b-gray p-4;
   .header {
     &__options {
       &--icon {
@@ -29,7 +29,7 @@
         }
       }
 
-      &--phone{
+      &--phone {
         @apply hidden;
       }
     }
@@ -44,11 +44,11 @@
     &__options {
       // @apply grid gap-4 items-center pb-4;
 
-      &--always-visible{
+      &--always-visible {
         @apply visible flex justify-between items-center;
       }
 
-      &--web{
+      &--web {
         @apply hidden;
       }
 
@@ -59,7 +59,7 @@
         }
       }
 
-      &--phone{
+      &--phone {
         @apply flex gap-4;
       }
     }

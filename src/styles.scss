@@ -44,8 +44,8 @@ $dark-theme: mat.define-dark-theme(
 
 html,
 body {
-  height: 100%;
   @include mat.all-component-themes($my-theme);
+  @apply h-full relative;
 }
 body {
   font-family: "SF Pro Display", system-ui, sans-serif;
@@ -53,6 +53,13 @@ body {
   transition: background-color 100ms ease-in-out;
 }
 
+// For prevent sticky issue header and player component
+.mat-drawer,
+.mat-drawer-content,
+.mat-drawer-container {
+  overflow: unset !important;
+}
+// For prevent material input field border override issue by tailwindcss
 .mat-mdc-form-field {
   display: block !important;
 }
@@ -60,15 +67,15 @@ body {
   .mdc-notched-outline__notch {
   border-right-style: hidden;
 }
-
 .mat-mdc-form-field-subscript-wrapper,
 .mat-mdc-form-field-hint-wrapper,
 .mat-mdc-form-field-error-wrapper {
   padding: 0 !important;
 }
-
+// For Dark mode
 .dark {
   background-color: #121212;
   background-blend-mode: soft-light;
   @include mat.all-component-themes($dark-theme);
+  // background: var(--black);
 }

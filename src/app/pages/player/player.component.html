@@ -9,13 +9,8 @@
         <h4 class="player-info-title">{{currentVideoInfo.title}}</h4>
         <ng-container *ngTemplateOutlet="limited_accordion"></ng-container>
     </div>
-
-    <div class="player-list-wrapper phone">
-        <ng-container *ngTemplateOutlet="player_playlist"></ng-container>
-    </div>
 </section>
-
-<div class="player-list-wrapper web">
+<div class="player-list-wrapper">
     <ng-container *ngTemplateOutlet="player_playlist"></ng-container>
 </div>
 
@@ -28,7 +23,7 @@
                     @if (!authService.authUser()) {
                     Unlock a feature by login
                     }@else {
-                    You can add any of your favourite video
+                    Add your favourite video to public playlist
                     }
                 </p>
             </mat-expansion-panel-header>
@@ -57,7 +52,7 @@
 
 
 <ng-template #player_playlist>
-    <mat-accordion>
+    <mat-accordion class="mat-accordion-custom">
         <mat-expansion-panel (opened)="panelOpenState = true" [expanded]="panelOpenState"
             (closed)="panelOpenState = false">
             <mat-expansion-panel-header>

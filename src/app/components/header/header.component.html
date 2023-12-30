@@ -17,7 +17,7 @@
 <ng-template #header_menus>
     <ul class="header__options header__options--web">
         @for (routeMenu of routeMenus; track $index) {
-        <li class="header__options--item">
+        <li class="header__options--item" title="{{routeMenu.name}}">
             <app-button>
                 <a [routerLink]="routeMenu.route">{{routeMenu.name}}</a>
             </app-button>
@@ -52,7 +52,7 @@
 
 <ng-template #route_buttons_container>
     @for (routeButton of routeButtons; track $index) {
-    <li>
+    <li title="{{routeButton.name}}">
         <a mat-raised-button color="accent" [routerLink]="routeButton.route">{{routeButton.name}}</a>
     </li>
     } @empty {
@@ -60,7 +60,7 @@
         <a mat-raised-button color="accent" routerLink="#">{{emptyMessage}}</a>
     </li>
     }
-    <li>
+    <li title="Toggle Theme">
         <a mat-raised-button color="accent" (click)="toggleTheme()">
             @if(isDarkThemeEnable){
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -80,14 +80,14 @@
 </ng-template>
 
 <ng-template #menu_icon>
-    <svg (click)="onMenuClick.emit()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-        stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-6 h-6 dark:text-white">
+    <svg title="Open Side Menu" (click)="onMenuClick.emit()" xmlns="http://www.w3.org/2000/svg" fill="none"
+        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-6 h-6 dark:text-white">
         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
     </svg>
 </ng-template>
 
 <ng-template #auth_Buttons>
-    <li>
+    <li title="Go to Public Playlist">
         <a mat-raised-button color="accent" routerLink="player" class="flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-6 h-6">
@@ -98,7 +98,7 @@
             <p class="hidden md:block">{{authService.authUser()?.displayName}}</p>
         </a>
     </li>
-    <li>
+    <li title="Toggle Theme">
         <app-button>
             @if(isDarkThemeEnable){
             <svg (click)="toggleTheme()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -115,7 +115,7 @@
             }
         </app-button>
     </li>
-    <li>
+    <li title="Log Out">
         <app-button>
             <svg (click)="kickOut()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

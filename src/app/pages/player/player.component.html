@@ -66,8 +66,8 @@
                 <ul class="player-list-items">
                     @if (videoInfos$|async) {
                     @for (item of (videoInfos$ | async); track $index) {
-                    <li class="player-list-item" [class.active]="item.videoId===currentVideoInfo.videoId"
-                        (click)="setCurrentVideo(item)">
+                    <li title="{{item.title}}" class="player-list-item"
+                        [class.active]="item.videoId===currentVideoInfo.videoId" (click)="setCurrentVideo(item)">
                         <img
                             [src]="sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/'+item.videoId+'/default.jpg')">
                         <p>{{item.title}}</p>

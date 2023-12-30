@@ -32,6 +32,12 @@
       &-title {
         @apply font-semibold;
       }
+      .info {
+        @apply grid gap-2 row-start-2;
+      }
+      .actions {
+        @apply flex justify-end;
+      }
     }
     &-list {
       &-wrapper {
@@ -82,9 +88,13 @@
       @apply w-full h-[31rem] rounded-xl overflow-hidden;
     }
     &-info {
-      @apply flex flex-col gap-4 pt-4;
+      @apply flex gap-4 pt-4;
       &-title {
         @apply font-semibold text-3xl pb-8;
+      }
+
+      .info {
+        @apply flex-1;
       }
     }
     &-list {

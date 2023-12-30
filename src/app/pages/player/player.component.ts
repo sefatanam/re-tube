@@ -10,6 +10,8 @@ import { Firestore, collectionData, collection, setDoc, doc } from '@angular/fir
 import { AuthService } from 'services/auth.service';
 import { HotToastService } from '@ngneat/hot-toast';
 import { Observable, tap } from 'rxjs';
+import { ButtonComponent } from "../../components/button/button.component";
+import { DOMService } from 'services/dom.service';
 // import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 export function youtubeUrlValidator(): ValidatorFn {
@@ -51,7 +53,8 @@ function generateRandomUId(videoInfo: VideoInfo): string {
   standalone: true,
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss',
-  imports: [MatExpansionModule, InputComponent, ReactiveFormsModule, CommonModule, MatButtonModule]
+  imports: [MatExpansionModule, InputComponent, ReactiveFormsModule, CommonModule, MatButtonModule, ButtonComponent],
+  providers: [DOMService]
 })
 export class PlayerComponent implements OnInit {
   currentVideoInfo: VideoInfo = { videoId: '', title: '', userId: '', userName: '' }
@@ -66,6 +69,7 @@ export class PlayerComponent implements OnInit {
   authService = inject(AuthService)
   toastService = inject(HotToastService)
   videoInfos$ !: Observable<VideoInfo[]>;
+  domService = inject(DOMService)
 
   ngOnInit(): void {
     try {
@@ -138,7 +142,7 @@ export class PlayerComponent implements OnInit {
   }
 
   makeVideoSafeUrl(videoId: string) {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${videoId}`)
+    return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${videoId}?autoplay=1`)
   }
 
 
@@ -146,4 +150,6 @@ export class PlayerComponent implements OnInit {
     this.currentVideoInfo = videInfo;
     this.safeURL = this.makeVideoSafeUrl(this.currentVideoInfo.videoId)
   }
+
+  enablePip = (iframeId: string) => this.domService.togglePictureInPicture(iframeId)
 }

@@ -2,7 +2,7 @@
     <div class="header__options header__options--always-visible">
         <div class="header__options--icon">
             <ng-container *ngTemplateOutlet="menu_icon"></ng-container>
-            <span routerLink="/" class="text-black dark:text-white">{{env.appName}}</span>
+            <span routerLink="/" class="animated-text">{{env.appName}}</span>
         </div>
         <ng-container *ngTemplateOutlet="header_menus"></ng-container>
         <ng-container *ngTemplateOutlet="header_buttons_phone"></ng-container>

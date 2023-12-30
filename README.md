@@ -1,27 +1,34 @@
-# ReTube
+# Re-Tube
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.0.
+## A minimal youtube videos organizer, to reduce your pain 😮‍💨
 
-## Development server
+## ✨ Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- 🕹 Simple and clear user interface
+- 📡 Instant update across all instance automatically 
+- 🌑 Dark mode
+- 🚀 Install as app to any platform (android, iOS, Windows or MacOS)
+- 🛠 More features in development
 
-## Code scaffolding
+## Introduction
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Empowering users to rediscover, curate, and elevate their streaming experiences. Whether it's videos, podcasts, or live broadcasts, StreamRise offers a dynamic platform to explore, organize, and enjoy multimedia content tailored to your interests.
 
-## Build
+## Usage
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+To get started with Re-Tube, simply navigate [Link](https://re-learn-pied.vercel.app/) <br>
+_NB: this vercel link currently in development previously known as re-learn, now it's re-brand as Re.Tube_
 
-## Running unit tests
+## Contributing
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Contributions to Re-Learn are welcome! If you'd like to contribute, please follow these guidelines:
+- Fork the repository
+- Create a new branch for your feature or improvement
+- Make your changes
+- Submit a pull request detailing your changes
 
-## Running end-to-end tests
+Your contributions will help make learning more accessible and enjoyable for others.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## License
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+This project is licensed under the [MIT License](LICENSE), which means you are free to use, modify, and distribute the content as long as the original license is included.

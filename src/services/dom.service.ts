@@ -7,91 +7,36 @@ import { HotToastService } from '@ngneat/hot-toast';
 })
 export class DOMService {
 
-  private pipWindow: any;
   document = inject(DOCUMENT);
   toastService = inject(HotToastService);
 
-  togglePictureInPicture(iframeId: string): void {
-    const iframeElement = document.getElementById(iframeId) as HTMLIFrameElement;
-
-    if (!iframeElement) {
-      this.toastService.error("Iframe element not found.", { position: 'bottom-center' });
-      return;
-    }
-
-    const iframeDocument = iframeElement.contentDocument || iframeElement.contentWindow?.document;
-
-    if (iframeDocument) {
-      const videoElement = iframeDocument.querySelector('video') as HTMLVideoElement;
-
-      if (videoElement) {
-        if ('pictureInPictureEnabled' in document) {
-          videoElement.addEventListener('loadedmetadata', () => {
-            videoElement.addEventListener('click', this.handleToggle.bind(this, videoElement));
-          });
-        } else {
-          this.toastService.error("Picture-in-Picture is not supported in this browser or device.", { position: 'bottom-center' });
-        }
-      } else {
-        this.toastService.error("Video element not found within the iframe.", { position: 'bottom-center' });
-      }
-    } else {
-      this.toastService.error("Iframe document not accessible.", { position: 'bottom-center' });
-    }
-  }
-
-  private async handleToggle(video: HTMLVideoElement): Promise<void> {
+  async enterPiP(args: { containerId: string, pipElementId: string }) {
     try {
-      if (document.pictureInPictureElement === video) {
-        await document.exitPictureInPicture();
-      } else {
-        await video.requestPictureInPicture();
+      // Close Picture-in-Picture window if any.
+      // @ts-ignore
+      if (documentPictureInPicture.window) {
+        // @ts-ignore
+        documentPictureInPicture.window.close();
+        return;
       }
-    } catch (error) {
-      this.toastService.error("Error toggling Picture-in-Picture mode.", { position: 'bottom-center' });
-      console.error('Error toggling Picture-in-Picture mode:', error);
+      // @ts-ignore
+      // Open a Picture-in-Picture window.
+      const pipWindow = await documentPictureInPicture.requestWindow({
+        width: 350,
+        height: 200,
+      });
+      // Move video to the Picture-in-Picture window and make it full page.
+      const video = this.document.querySelector(args.pipElementId);
+      pipWindow.document.body.append(video);
+      // Listen for the PiP closing event to move the video back.
+      pipWindow.addEventListener("pagehide", (event: any) => {
+        const videoContainer = document.querySelector(args.containerId);
+        const pipVideo = event.target.querySelector(args.pipElementId);
+        // @ts-ignore
+        videoContainer.append(pipVideo);
+      });
+    } catch (err: any) {
+      this.toastService.error(`Something went wrong! ${err['message']}`)
     }
-  }
-
-
-  async enterPiP() {
-    const player = document.querySelector("#pip_container");
-    if (!player) {
-      this.toastService.error("Something went wrong,", { position: 'bottom-center' })
-      return;
-    }
-
-    const pipOptions = {
-      width: player.clientWidth,
-      height: player.clientHeight,
-    };
-
-    // @ts-ignore
-    pipWindow = await documentPictureInPicture.requestWindow(pipOptions);
-
-    // Add player to the PiP window.
-    this.pipWindow.document.body.append(player);
-
-    // Listen for the PiP closing event to put the video back.
-    this.pipWindow.addEventListener("pagehide", this.onLeavePiP.bind(this.pipWindow), {
-      once: true,
-    });
-  }
-
-  // Called when the PiP window has closed.
-  private onLeavePiP() {
-    if (this !== this.pipWindow) {
-      return;
-    }
-
-    const playerContainer = document.querySelector("#pip_container");
-    if (!playerContainer) {
-      this.toastService.error('Please close and re-open the app', { position: 'bottom-center' })
-      return
-    }
-    // Add the player back to the main window.
-    const pipPlayer = this.pipWindow.document.querySelector("#iframeVideoPlayer");
-    playerContainer.append(pipPlayer);
-    this.pipWindow = null;
   }
 }

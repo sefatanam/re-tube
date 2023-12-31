@@ -1,7 +1,7 @@
 <section class="player-wrapper">
     <div class="player-src" id="pip_container">
         <!-- <iframe width="100%" height="100%" src="https://www.youtube.com/embed/zXiQZkrJFnA"></iframe> -->
-        <iframe id="iframeVideoPlayer" allow="picture-in-picture; autoplay; clipboard-write; gyroscope" *ngIf="safeURL"
+        <iframe id="pip_element" allow="picture-in-picture; autoplay; clipboard-write; gyroscope" *ngIf="safeURL"
             width="100%" height="100%" [src]="safeURL" allowfullscreen="allowfullscreen"
             mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen"
             oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>
@@ -12,7 +12,7 @@
             <ng-container *ngTemplateOutlet="limited_accordion"></ng-container>
         </div>
         <div class="actions">
-            <button mat-button (click)="enablePip('iframeVideoPlayer')">
+            <button mat-button (click)="enablePip()">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-8 h-8 hover:cursor-pointer ">
                     <path stroke-linecap="round" stroke-linejoin="round"

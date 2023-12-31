@@ -7,6 +7,7 @@ import { HotToastService } from '@ngneat/hot-toast';
 })
 export class DOMService {
 
+  private pipWindow: any;
   document = inject(DOCUMENT);
   toastService = inject(HotToastService);
 
@@ -50,5 +51,47 @@ export class DOMService {
       this.toastService.error("Error toggling Picture-in-Picture mode.", { position: 'bottom-center' });
       console.error('Error toggling Picture-in-Picture mode:', error);
     }
+  }
+
+
+  async enterPiP() {
+    const player = document.querySelector("#pip_container");
+    if (!player) {
+      this.toastService.error("Something went wrong,", { position: 'bottom-center' })
+      return;
+    }
+
+    const pipOptions = {
+      width: player.clientWidth,
+      height: player.clientHeight,
+    };
+
+    // @ts-ignore
+    pipWindow = await documentPictureInPicture.requestWindow(pipOptions);
+
+    // Add player to the PiP window.
+    this.pipWindow.document.body.append(player);
+
+    // Listen for the PiP closing event to put the video back.
+    this.pipWindow.addEventListener("pagehide", this.onLeavePiP.bind(this.pipWindow), {
+      once: true,
+    });
+  }
+
+  // Called when the PiP window has closed.
+  private onLeavePiP() {
+    if (this !== this.pipWindow) {
+      return;
+    }
+
+    const playerContainer = document.querySelector("#pip_container");
+    if (!playerContainer) {
+      this.toastService.error('Please close and re-open the app', { position: 'bottom-center' })
+      return
+    }
+    // Add the player back to the main window.
+    const pipPlayer = this.pipWindow.document.querySelector("#iframeVideoPlayer");
+    playerContainer.append(pipPlayer);
+    this.pipWindow = null;
   }
 }

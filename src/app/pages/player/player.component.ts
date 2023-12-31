@@ -151,5 +151,5 @@ export class PlayerComponent implements OnInit {
     this.safeURL = this.makeVideoSafeUrl(this.currentVideoInfo.videoId)
   }
 
-  enablePip = (iframeId: string) => this.domService.togglePictureInPicture(iframeId)
+  enablePip = async (iframeId: string) => await this.domService.enterPiP()
 }

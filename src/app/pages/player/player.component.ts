@@ -12,6 +12,7 @@ import { HotToastService } from '@ngneat/hot-toast';
 import { Observable, tap } from 'rxjs';
 import { ButtonComponent } from "../../components/button/button.component";
 import { DOMService } from 'services/dom.service';
+import { Platform } from '@angular/cdk/platform';
 // import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 export function youtubeUrlValidator(): ValidatorFn {
@@ -58,6 +59,7 @@ function generateRandomUId(videoInfo: VideoInfo): string {
 })
 export class PlayerComponent implements OnInit {
   currentVideoInfo: VideoInfo = { videoId: '', title: '', userId: '', userName: '' }
+  platform = inject(Platform)
 
   videoInfo: VideoInfo = {
     videoId: '',

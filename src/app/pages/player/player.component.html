@@ -11,6 +11,7 @@
             <h4 class="player-info-title">{{currentVideoInfo.title}}</h4>
             <ng-container *ngTemplateOutlet="limited_accordion"></ng-container>
         </div>
+        @if (platform.BLINK) {
         <div class="actions">
             <button mat-button (click)="enablePip()">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -20,6 +21,7 @@
                 </svg>
             </button>
         </div>
+        }
     </div>
 </section>
 <div class="player-list-wrapper">

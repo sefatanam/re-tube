@@ -8,70 +8,22 @@
   --mat-expansion-container-shape: 0.75rem;
 }
 
-@include for-phone {
-  :host {
+:host {
+  @include for-phone {
     @apply grid sticky top-1;
 
     ::ng-deep
       .mat-accordion-custom
       > .mat-expanded
       > .mat-expansion-panel-content {
-      height: 45vh !important;
+      height: 50vh !important;
       overflow-y: overlay !important;
     }
   }
-  .player {
-    &-wrapper {
-      @apply grid p-4 gap-4 sticky top-1 z-50;
-    }
-    &-src {
-      @apply w-full h-72 rounded-xl overflow-hidden;
-    }
-    &-info {
-      @apply grid gap-4;
-      &-title {
-        @apply font-semibold;
-      }
-      .info {
-        @apply grid gap-2 row-start-2;
-      }
-      .actions {
-        @apply flex justify-end;
-      }
-    }
-    &-list {
-      &-wrapper {
-        @apply p-4  -z-50 sticky top-2;
-      }
-      &-container {
-        @apply grid;
-      }
 
-      &-items {
-        @apply grid gap-2;
-      }
-
-      &-item {
-        @apply flex items-start gap-2 p-2 rounded-xl cursor-pointer  hover:bg-gray hover:dark:bg-dark_gray;
-        img {
-          @apply h-[80px] w-[125px] rounded overflow-hidden object-cover;
-        }
-
-        p {
-          @apply font-sans flex-1 text-black dark:text-white xl:text-lg;
-        }
-
-        &.active {
-          @apply bg-gray dark:bg-dark_gray;
-        }
-      }
-    }
-  }
-}
-
-@include for-web {
-  :host {
+  @include for-web {
     @apply flex p-4 gap-4;
+
     ::ng-deep
       .mat-accordion-custom
       > .mat-expanded
@@ -80,15 +32,49 @@
       overflow-y: overlay !important;
     }
   }
-  .player {
-    &-wrapper {
+}
+
+.player {
+  &-wrapper {
+    @include for-phone {
+      @apply grid p-4 gap-4 sticky top-1 z-50;
+    }
+
+    @include for-web {
       @apply flex-1;
     }
-    &-src {
+  }
+
+  &-src {
+    @include for-phone {
+      @apply w-full h-72 rounded-xl overflow-hidden;
+    }
+
+    @include for-web {
       @apply w-full h-[31rem] rounded-xl overflow-hidden;
     }
-    &-info {
+  }
+
+  &-info {
+    @include for-phone {
+      @apply grid gap-4;
+
+      &-title {
+        @apply font-semibold;
+      }
+
+      .info {
+        @apply grid gap-2 row-start-2;
+      }
+
+      .actions {
+        @apply flex justify-end;
+      }
+    }
+
+    @include for-web {
       @apply flex gap-4 pt-4;
+
       &-title {
         @apply font-semibold text-3xl pb-8;
       }
@@ -97,32 +83,42 @@
         @apply flex-1;
       }
     }
-    &-list {
-      &-container {
-        @apply grid;
+  }
+
+  &-list {
+    &-wrapper {
+      @include for-phone {
+        @apply p-4 -z-50 sticky;
+      }
+    }
+
+    &-container {
+      @apply grid;
+    }
+
+    &-items {
+      @apply grid gap-2;
+    }
+
+    &-item {
+      @apply flex items-start gap-2 p-2 rounded-xl cursor-pointer  hover:bg-gray hover:dark:bg-dark_gray;
+
+      img {
+        @apply h-[80px] w-[125px] rounded overflow-hidden object-cover;
       }
 
-      &-items {
-        @apply grid gap-2;
+      p {
+        @apply font-sans flex-1 text-black dark:text-white xl:text-lg;
       }
 
-      &-item {
-        @apply flex items-start gap-2 p-2 rounded-xl cursor-pointer  hover:bg-gray hover:dark:bg-dark_gray;
-        img {
-          @apply h-[80px] w-[125px] rounded overflow-hidden object-cover;
-        }
-
-        p {
-          @apply font-sans flex-1 text-black dark:text-white xl:text-lg;
-        }
-
-        &.active {
-          @apply bg-gray dark:bg-dark_gray;
-        }
+      &.active {
+        @apply bg-gray dark:bg-dark_gray;
       }
     }
   }
+}
 
+@include for-web {
   .player-list-wrapper {
     @apply w-1/3;
   }

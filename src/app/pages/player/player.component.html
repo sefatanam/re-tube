@@ -1,4 +1,4 @@
-<section class="player-wrapper">
+<section class="player-wrapper" #player_wrapper>
     <div class="player-src" id="pip_container">
         <!-- <iframe width="100%" height="100%" src="https://www.youtube.com/embed/zXiQZkrJFnA"></iframe> -->
         <iframe id="pip_element" allow="picture-in-picture; autoplay; clipboard-write; gyroscope" *ngIf="safeURL"
@@ -24,7 +24,7 @@
         }
     </div>
 </section>
-<div class="player-list-wrapper">
+<div class="player-list-wrapper" [style.top]="player_wrapper | adjustHeight">
     <ng-container *ngTemplateOutlet="player_playlist"></ng-container>
 </div>
 

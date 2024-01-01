@@ -13,6 +13,7 @@ import { Observable, tap } from 'rxjs';
 import { ButtonComponent } from "../../components/button/button.component";
 import { DOMService } from 'services/dom.service';
 import { Platform } from '@angular/cdk/platform';
+import { AdjustHeightPipe } from "./adjust-height.pipe";
 // import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 export function youtubeUrlValidator(): ValidatorFn {
@@ -54,8 +55,8 @@ function generateRandomUId(videoInfo: VideoInfo): string {
   standalone: true,
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss',
-  imports: [MatExpansionModule, InputComponent, ReactiveFormsModule, CommonModule, MatButtonModule, ButtonComponent],
-  providers: [DOMService]
+  providers: [DOMService],
+  imports: [MatExpansionModule, InputComponent, ReactiveFormsModule, CommonModule, MatButtonModule, ButtonComponent, AdjustHeightPipe]
 })
 export class PlayerComponent implements OnInit {
   currentVideoInfo: VideoInfo = { videoId: '', title: '', userId: '', userName: '' }

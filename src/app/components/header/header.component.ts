@@ -1,5 +1,5 @@
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { Component, EventEmitter, Input, Output, afterNextRender, inject, signal } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output, PLATFORM_ID, afterNextRender, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { Menu } from '@typings/menu.type';
@@ -16,6 +16,15 @@ import { environment } from 'environments/environment.dev';
   imports: [CommonModule, RouterLink, MatButtonModule, ButtonComponent]
 })
 export class HeaderComponent {
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    afterNextRender(() => {
+      const theme = window.localStorage.getItem('theme') ?? 'light';
+      window.document.querySelector('body')?.classList.add(theme);
+      this.isDarkThemeEnable = theme === 'dark';
+    })
+  }
+
   isDarkThemeEnable: boolean = false;
   env = environment;
 
@@ -29,16 +38,8 @@ export class HeaderComponent {
 
   document = inject(DOCUMENT);
 
-  constructor() {
-    afterNextRender(() => {
-      const theme = window.localStorage.getItem('theme') ?? 'light';
-      window.document.querySelector('body')?.classList.add(theme);
-      this.isDarkThemeEnable = theme === 'dark';
-      console.log(theme)
-    })
-  }
-
   kickOut = () => this.authService.signOut();
+
   toggleTheme() {
     this.isDarkThemeEnable = !this.isDarkThemeEnable;
     if (this.isDarkThemeEnable) {
@@ -50,4 +51,12 @@ export class HeaderComponent {
     }
     window.localStorage.setItem('theme', this.isDarkThemeEnable ? 'dark' : 'light')
   }
+
+  // ngOnInit(): void {
+  //   if (isPlatformBrowser(this.platformId)) {
+  //     const theme = window.localStorage.getItem('theme') ?? 'light';
+  //     window.document.querySelector('body')?.classList.add(theme);
+  //     this.isDarkThemeEnable = theme === 'dark';
+  //   }
+  // }
 }

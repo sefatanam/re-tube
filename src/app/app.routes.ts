@@ -9,14 +9,18 @@ export const routes: Routes = [
     {
         path: 'login',
         loadComponent: () => import('./pages/auth/continue/continue.component').then(c => c.ContinueComponent),
-        canActivate:[authGuard]
+        canActivate: [authGuard]
+    },
+    {
+        path: 'share-target',
+        loadComponent: () => import('./pages/share-target/share-target.component').then(c => c.ShareTargetComponent),
     },
     {
         path: '',
         loadComponent: () => import('./pages/home/home.component').then(c => c.HomeComponent)
     },
     {
-        path:'**',
-        loadComponent:()=>import('./pages/not-found/not-found.component').then(c=>c.NotFoundComponent)
+        path: '**',
+        loadComponent: () => import('./pages/not-found/not-found.component').then(c => c.NotFoundComponent)
     }
 ]

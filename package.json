@@ -25,6 +25,7 @@
     "@angular/service-worker": "^17.0.0",
     "@angular/ssr": "^17.0.0",
     "@ngneat/hot-toast": "^6.0.2",
+    "dexie": "^3.2.4",
     "express": "^4.18.2",
     "firebase": "^10.7.1",
     "rxjs": "~7.8.0",

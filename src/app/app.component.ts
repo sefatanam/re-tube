@@ -6,9 +6,6 @@ import { MainContentComponent } from './components/main-content/main-content.com
 import { MenuService } from 'services/menu.service';
 import { RootMenu } from '@typings/menu.type';
 import { AuthService } from 'services/auth.service';
-import { initializeApp } from 'firebase/app';
-
-initializeApp(environment.firebaseConfig);
 
 @Component({
   selector: 'app-root',

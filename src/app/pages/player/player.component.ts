@@ -9,11 +9,15 @@ import {Platform} from '@angular/cdk/platform';
 import {AdjustHeightPipe} from "./adjust-height.pipe";
 import {VideoInfo} from "@interface/video-info.interface";
 import {youtubeUrlValidator} from "@validators/youtube.validators";
-import {convertSafeYoutubeUrl, extractYouTubeVideoId} from "@utils/youtube.util";
+import { YoutubeUtil} from "@utils/youtube.util";
 import {User} from "firebase/auth";
-import {ButtonComponent, InputComponent} from '@components/index';
 import {MatButtonModule} from "@angular/material/button";
-import {AuthService, DOMService, YoutubeService} from '@services/index';
+import {ThumbnailPipe} from "../../../pipes/thumbnail.pipe";
+import {YoutubeService} from "@services/youtube.service";
+import {DOMService} from "@services/dom.service";
+import {InputComponent} from "@components/input/input.component";
+import {ButtonComponent} from "@components/button/button.component";
+import {AuthService} from "@services/auth.service";
 
 @Component({
   selector: 'app-player',
@@ -21,15 +25,16 @@ import {AuthService, DOMService, YoutubeService} from '@services/index';
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss',
   providers: [DOMService, YoutubeService],
-  imports: [MatExpansionModule, InputComponent, ReactiveFormsModule, CommonModule, MatButtonModule, ButtonComponent, AdjustHeightPipe]
+  imports: [MatExpansionModule, InputComponent, ReactiveFormsModule, CommonModule, MatButtonModule, ButtonComponent, AdjustHeightPipe, ThumbnailPipe]
 })
 export class PlayerComponent implements OnInit {
   youtubeService = inject(YoutubeService);
-  authService = inject(AuthService);
+  youtubeUtil = inject(YoutubeUtil);
+  authUser = inject(AuthService).authUser;
   toastService = inject(HotToastService);
   platform = inject(Platform);
   domService = inject(DOMService);
-  videoInfos$ !: Observable<VideoInfo[]>;
+  videoInfos$ !: Observable<VideoInfo[]>
   panelOpenState = true;
   protected safeURL!: SafeResourceUrl;
   protected currentVideoInfo!: VideoInfo;
@@ -42,10 +47,10 @@ export class PlayerComponent implements OnInit {
 
   ngOnInit(): void {
     try {
-      this.videoInfos$ = this.youtubeService.getVideos().pipe((tap(videos => {
+      this.videoInfos$ = this.youtubeService.getVideos().pipe(tap((videos) => {
         this.currentVideoInfo = videos[0];
-        this.safeURL = convertSafeYoutubeUrl(this.currentVideoInfo.videoId);
-      })));
+        this.safeURL = this.youtubeUtil.convertSafeYoutubeUrl(this.currentVideoInfo.videoId);
+      }))
     } catch (err) {
       this.toastService.error('Failed to fetch videos.', {position: 'bottom-center'})
     }
@@ -60,7 +65,7 @@ export class PlayerComponent implements OnInit {
       if (!extractedVideoId) {
         return this.handleError('Link is not valid, Cannot extract the video id.');
       }
-      const authUser = this.authService.authUser();
+      const authUser = this.authUser();
       if (!authUser) {
         return this.handleError('You must have to login before submit');
       }
@@ -81,7 +86,7 @@ export class PlayerComponent implements OnInit {
 
   setCurrentVideo(videInfo: VideoInfo) {
     this.currentVideoInfo = videInfo;
-    this.safeURL = convertSafeYoutubeUrl(this.currentVideoInfo.videoId)
+    this.safeURL = this.youtubeUtil.convertSafeYoutubeUrl(this.currentVideoInfo.videoId)
   }
 
   enablePip = async () => await this.domService.enterPiP({containerId: '#pip_container', pipElementId: '#pip_element'});
@@ -93,12 +98,12 @@ export class PlayerComponent implements OnInit {
   private extractVideoIdFromForm(): string | false {
     const {videoId} = this.magicForm.value;
     if (!videoId) return false;
-    return extractYouTubeVideoId(videoId);
+    return this.youtubeUtil.extractYouTubeVideoId(videoId);
   }
 
   private isValidTitleAndDisplayName(): boolean {
     const {title} = this.magicForm.value;
-    const {displayName} = this.authService.authUser() || {};
+    const displayName = this.authUser()?.displayName
     return !!title && !!displayName;
   }
 

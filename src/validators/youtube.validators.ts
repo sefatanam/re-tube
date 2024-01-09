@@ -4,7 +4,7 @@ export const YOUTUBE_URL_REGEX=/(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube
 
 export function youtubeUrlValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
-    const valid = YOUTUBE_URL_REGEX.test(control.value);
+    const valid = YOUTUBE_URL_REGEX.test(control?.value);
     return valid ? null : { pattern: true };
   };
 }

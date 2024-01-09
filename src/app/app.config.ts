@@ -5,13 +5,13 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { environment } from '../environments/environment.dev';
 import { provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideServiceWorker } from '@angular/service-worker';
 import { AuthService } from 'services/auth.service';
 import { provideHotToastConfig } from '@ngneat/hot-toast';
 import { PlatformModule } from '@angular/cdk/platform';
 import { initializeApp } from "firebase/app";
 import { initializer } from './tokens/initializer.token';
+import {provideAnimationsAsync} from "@angular/platform-browser/animations/async";
 
 initializeApp(environment.firebaseConfig)
 
@@ -27,7 +27,7 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     importProvidersFrom(provideFirebaseApp(() => initializeApp(environment.firebaseConfig))),
     importProvidersFrom(provideFirestore(() => getFirestore())),
-    provideAnimations(),
+    provideAnimationsAsync(),
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000'

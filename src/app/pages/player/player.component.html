@@ -1,104 +1,104 @@
 <section class="player-wrapper" #player_wrapper>
-    <div class="player-src" id="pip_container">
-        <!-- <iframe width="100%" height="100%" src="https://www.youtube.com/embed/zXiQZkrJFnA"></iframe> -->
-        <iframe id="pip_element" allow="picture-in-picture; autoplay; clipboard-write; gyroscope" *ngIf="safeURL"
+  <div class="player-src" id="pip_container">
+    <!-- <iframe width="100%" height="100%" src="https://www.youtube.com/embed/zXiQZkrJFnA"></iframe> -->
+    <iframe id="pip_element" allow="picture-in-picture; autoplay; clipboard-write; gyroscope" *ngIf="safeURL"
             width="100%" height="100%" [src]="safeURL" allowfullscreen="allowfullscreen"
             mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen"
             oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>
-    </div>
-    <div class="player-info">
-        <div class="info">
-            <h4 class="player-info-title">{{currentVideoInfo.title}}</h4>
-            <ng-container *ngTemplateOutlet="limited_accordion"></ng-container>
-        </div>
-        @if (platform.BLINK && !platform.ANDROID && !platform.IOS) {
-        <div class="actions">
-            <button mat-button (click)="enablePip()">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="w-8 h-8 hover:cursor-pointer ">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M16.5 8.25V6a2.25 2.25 0 0 0-2.25-2.25H6A2.25 2.25 0 0 0 3.75 6v8.25A2.25 2.25 0 0 0 6 16.5h2.25m8.25-8.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-7.5A2.25 2.25 0 0 1 8.25 18v-1.5m8.25-8.25h-6a2.25 2.25 0 0 0-2.25 2.25v6" />
-                </svg>
-            </button>
-        </div>
-        }
-    </div>
+  </div>
+  <div class="player-info">
+    @if (currentVideoInfo) {
+      <div class="info">
+        <h4 class="player-info-title">{{ currentVideoInfo.title }}</h4>
+        <ng-container *ngTemplateOutlet="limited_accordion"></ng-container>
+      </div>
+    }
+    @if (platform.BLINK && !platform.ANDROID && !platform.IOS) {
+      <div class="actions">
+        <button mat-button (click)="enablePip()">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+               stroke="currentColor" class="w-8 h-8 hover:cursor-pointer ">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M16.5 8.25V6a2.25 2.25 0 0 0-2.25-2.25H6A2.25 2.25 0 0 0 3.75 6v8.25A2.25 2.25 0 0 0 6 16.5h2.25m8.25-8.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-7.5A2.25 2.25 0 0 1 8.25 18v-1.5m8.25-8.25h-6a2.25 2.25 0 0 0-2.25 2.25v6"/>
+          </svg>
+        </button>
+      </div>
+    }
+  </div>
 </section>
 <div class="player-list-wrapper" [style.top]="player_wrapper | adjustHeight">
-    <ng-container *ngTemplateOutlet="player_playlist"></ng-container>
+  <ng-container *ngTemplateOutlet="player_playlist"></ng-container>
 </div>
 
 
 <ng-template #limited_accordion>
-    <mat-accordion>
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <p class="accordion-title">
-                    @if (!authService.authUser()) {
-                    Unlock a feature by login
-                    }@else {
-                    Add your favourite video to public playlist
-                    }
-                </p>
-            </mat-expansion-panel-header>
-            @if(authService.authUser()){
-            <ng-container *ngTemplateOutlet="limited_feature"></ng-container>
-            }
-        </mat-expansion-panel>
-    </mat-accordion>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <p class="accordion-title">
+          @if (!authUser()) {
+            Unlock a feature by login
+          } @else {
+            Add your favourite video to public playlist
+          }
+        </p>
+      </mat-expansion-panel-header>
+      @if (authUser()) {
+        <ng-container *ngTemplateOutlet="limited_feature"></ng-container>
+      }
+    </mat-expansion-panel>
+  </mat-accordion>
 </ng-template>
 
 
 <ng-template #limited_feature>
-    <div class="player-limited">
-        <p class="player-limited-text">More feature's are comming soon!</p>
-        <!-- <h4 class="player-limited-title">You can add any of your favourite video</h4> -->
-        @if(magicForm){
-        <form [formGroup]="magicForm" data-cy="form-group" class="player-limited-form" (ngSubmit)="submit()">
-            <app-input formControlName="title" placeholder="Naruto Shippuden" label="Title" data-cy="title"></app-input>
-            <app-input formControlName="videoId" placeholder="https://youtu.be/8ofCZObsnOo?list=RDgW2hE-DRx7Q"
-                label="Youtube Video link" data-cy="videoId"></app-input>
-            <button mat-raised-button type="submit" color="accent" [disabled]="magicForm.invalid"> Submit</button>
-        </form>
-        }
-    </div>
+  <div class="player-limited">
+    <p class="player-limited-text">More feature's are comming soon!</p>
+    <!-- <h4 class="player-limited-title">You can add any of your favourite video</h4> -->
+    @if (magicForm) {
+      <form [formGroup]="magicForm" data-cy="form-group" class="player-limited-form" (ngSubmit)="submit()">
+        <app-input formControlName="title" placeholder="Naruto Shippuden" label="Title" data-cy="title"></app-input>
+        <app-input formControlName="videoId" placeholder="https://youtu.be/8ofCZObsnOo?list=RDgW2hE-DRx7Q"
+                   label="Youtube Video link" data-cy="videoId"></app-input>
+        <button mat-raised-button type="submit" color="accent" [disabled]="magicForm.invalid"> Submit</button>
+      </form>
+    }
+  </div>
 </ng-template>
 
 
 <ng-template #player_playlist>
-    <mat-accordion class="mat-accordion-custom">
-        <mat-expansion-panel (opened)="panelOpenState = true" [expanded]="panelOpenState"
-            (closed)="panelOpenState = false">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    <p class="accordion-title">
-                        Public playlist
-                    </p>
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div class="player-list-container">
-                <ul class="player-list-items">
-                    @if (videoInfos$|async) {
-                    @for (item of (videoInfos$ | async); track $index) {
-                    <li title="{{item.title}}" class="player-list-item"
-                        [class.active]="item.videoId===currentVideoInfo.videoId" (click)="setCurrentVideo(item)">
-                        <img
-                            [src]="sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/'+item.videoId+'/default.jpg')">
-                        <p>{{item.title}}</p>
-                    </li>
-                    }@empty {
-                    <li>
-                        <p>No Videos Found</p>
-                    </li>
-                    }
-                    } @else {
-                    <li>
-                        <p>Loading...</p>
-                    </li>
-                    }
-
-                </ul>
-            </div>
-        </mat-expansion-panel>
-    </mat-accordion>
+  <mat-accordion class="mat-accordion-custom">
+    <mat-expansion-panel (opened)="panelOpenState = true" [expanded]="panelOpenState"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <p class="accordion-title">
+            Public playlist
+          </p>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="player-list-container">
+        <ul class="player-list-items">
+          @if (videoInfos$|async;as videos) {
+            @for (item of videos;track $index) {
+              <li title="{{item?.title}}" class="player-list-item"
+                  [class.active]="item.videoId===currentVideoInfo.videoId" (click)="setCurrentVideo(item)">
+                <img [src]="item?.videoId |  thumbnail" [alt]="item?.title">
+                <p>{{ item.title }}</p>
+              </li>
+            } @empty {
+              <li>
+                <p>No Videos Found</p>
+              </li>
+            }
+          } @else {
+            <li>
+              <p>Loading...</p>
+            </li>
+          }
+        </ul>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
 </ng-template>

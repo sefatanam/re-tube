@@ -31,7 +31,32 @@
               "src/manifest.webmanifest"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              {
+                "input": "src/assets/styles/main-theme.scss",
+                "bundleName": "main-theme",
+                "inject": true
+              },
+              {
+                "input": "src/assets/styles/hot-toast.scss",
+                "bundleName": "ngneat-hot-toast",
+                "inject": true
+              },
+              {
+                "input": "src/assets/styles/dark-theme.scss",
+                "bundleName": "dark-theme",
+                "inject": true
+              },
+              {
+                "input": "src/assets/styles/tailwind.scss",
+                "bundleName": "tailwind",
+                "inject": true
+              },
+              {
+                "input": "src/assets/styles/global-material-ovveride.scss",
+                "bundleName": "global-material-ovveride",
+                "inject": true
+              }
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -68,8 +93,10 @@
             },
             "development": {
               "optimization": false,
-              "extractLicenses": false,
-              "sourceMap": true
+              "extractLicenses": true,
+              "sourceMap": true,
+              "namedChunks": true,
+              "verbose": true
             }
           },
           "defaultConfiguration": "production"

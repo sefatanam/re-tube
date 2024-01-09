@@ -2,13 +2,10 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { environment } from '../environments/environment.dev';
-import { MainContentComponent } from './components/main-content/main-content.component';
-import { MenuService } from 'services/menu.service';
+import { MainContentComponent } from '@components/main-content/main-content.component';
+import { MenuService } from '@services/menu.service';
 import { RootMenu } from '@typings/menu.type';
-import { AuthService } from 'services/auth.service';
-import { initializeApp } from 'firebase/app';
-
-initializeApp(environment.firebaseConfig);
+import { AuthService } from '@services/auth.service';
 
 @Component({
   selector: 'app-root',

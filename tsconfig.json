@@ -24,11 +24,14 @@
     "lib": ["ES2022", "dom"],
     "paths": {
       "@typings/*": ["typings/*"],
-      "@services/*": ["services/8"],
+      "@services/*": ["services/*"],
       "@components/*": ["app/components/*"],
       "@pages/*": ["app/pages/*"],
       "@guards/*": ["guards/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@interface/*": ["interfaces/*"],
+      "@validators/*": ["validators/*"],
+
     }
   },
   "angularCompilerOptions": {

@@ -1,0 +1,19 @@
+// For prevent sticky issue header and player component
+.mat-drawer,
+.mat-drawer-content,
+.mat-drawer-container {
+  overflow: unset !important;
+}
+// For prevent material input field border override issue by tailwindcss
+.mat-mdc-form-field {
+  display: block !important;
+}
+.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field
+  .mdc-notched-outline__notch {
+  border-right-style: hidden;
+}
+.mat-mdc-form-field-subscript-wrapper,
+.mat-mdc-form-field-hint-wrapper,
+.mat-mdc-form-field-error-wrapper {
+  padding: 0 !important;
+}

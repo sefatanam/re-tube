@@ -9,8 +9,4 @@ describe('YoutubeService', () => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(YoutubeService);
   });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
 });

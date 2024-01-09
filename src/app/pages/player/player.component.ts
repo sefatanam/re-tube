@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {AfterContentInit, AfterViewInit, Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {SafeResourceUrl} from '@angular/platform-browser';
 import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
@@ -27,7 +27,8 @@ import {AuthService} from "@services/auth.service";
   providers: [DOMService, YoutubeService],
   imports: [MatExpansionModule, InputComponent, ReactiveFormsModule, CommonModule, MatButtonModule, ButtonComponent, AdjustHeightPipe, ThumbnailPipe]
 })
-export class PlayerComponent implements OnInit {
+export class PlayerComponent implements OnInit , AfterViewInit, OnDestroy{
+
   youtubeService = inject(YoutubeService);
   youtubeUtil = inject(YoutubeUtil);
   authUser = inject(AuthService).authUser;
@@ -39,6 +40,7 @@ export class PlayerComponent implements OnInit {
   protected safeURL!: SafeResourceUrl;
   protected currentVideoInfo!: VideoInfo;
   private formBuilder = inject(FormBuilder);
+
 
   magicForm = this.formBuilder.group({
     title: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -126,5 +128,13 @@ export class PlayerComponent implements OnInit {
 
   private handleError(message: string): void {
     this.toastService.error(message, {position: 'bottom-center'});
+  }
+
+
+  async ngAfterViewInit() {
+    await this.youtubeService.videosRealtimeUpdateInit()
+  }
+
+  ngOnDestroy(): void {
   }
 }

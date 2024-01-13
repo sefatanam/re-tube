@@ -7,6 +7,14 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/player/player.component').then(c => c.PlayerComponent)
     },
     {
+        path: 'personal',
+        loadComponent: () => import('./pages/personal/personal.component').then(c => c.PersonalComponent)
+    },
+    {
+        path: 'public',
+        loadComponent: () => import('./pages/public/public.component').then(c => c.PublicComponent)
+    },
+    {
         path: 'login',
         loadComponent: () => import('./pages/auth/continue/continue.component').then(c => c.ContinueComponent),
         canActivate: [authGuard]

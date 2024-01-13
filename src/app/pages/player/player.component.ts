@@ -6,7 +6,7 @@ import {CommonModule} from '@angular/common';
 import {HotToastService} from '@ngneat/hot-toast';
 import {Observable, tap} from 'rxjs';
 import {Platform} from '@angular/cdk/platform';
-import {AdjustHeightPipe} from "./adjust-height.pipe";
+import {AdjustHeightPipe} from "../../../pipes/adjust-height.pipe";
 import {VideoInfo} from "@interface/video-info.interface";
 import {youtubeUrlValidator} from "@validators/youtube.validators";
 import { YoutubeUtil} from "@utils/youtube.util";

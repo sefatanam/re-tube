@@ -1,44 +1,45 @@
-import {AfterContentInit, AfterViewInit, Component, inject, OnDestroy, OnInit} from '@angular/core';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {SafeResourceUrl} from '@angular/platform-browser';
-import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
-import {CommonModule} from '@angular/common';
-import {HotToastService} from '@ngneat/hot-toast';
-import {Observable, tap} from 'rxjs';
-import {Platform} from '@angular/cdk/platform';
-import {AdjustHeightPipe} from "./adjust-height.pipe";
-import {VideoInfo} from "@interface/video-info.interface";
-import {youtubeUrlValidator} from "@validators/youtube.validators";
-import { YoutubeUtil} from "@utils/youtube.util";
-import {User} from "firebase/auth";
-import {MatButtonModule} from "@angular/material/button";
-import {ThumbnailPipe} from "../../../pipes/thumbnail.pipe";
+import {AfterViewInit, Component, inject, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {PlayerComponent} from "@components/player/player.component";
 import {YoutubeService} from "@services/youtube.service";
-import {DOMService} from "@services/dom.service";
-import {InputComponent} from "@components/input/input.component";
-import {ButtonComponent} from "@components/button/button.component";
+import {YoutubeUtil} from "@utils/youtube.util";
 import {AuthService} from "@services/auth.service";
+import {HotToastService} from "@ngneat/hot-toast";
+import {Observable} from "rxjs";
+import {VideoInfo} from "@interface/video-info.interface";
+import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {youtubeUrlValidator} from "@validators/youtube.validators";
+import {User} from "firebase/auth";
+import {AsyncPipe, NgTemplateOutlet} from "@angular/common";
+import {InputComponent} from "@components/input/input.component";
+import {MatButtonModule} from "@angular/material/button";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 @Component({
-  selector: 'app-player',
+  selector: 'app-public',
   standalone: true,
-  templateUrl: './player.component.html',
-  styleUrl: './player.component.scss',
-  providers: [DOMService, YoutubeService],
-  imports: [MatExpansionModule, InputComponent, ReactiveFormsModule, CommonModule, MatButtonModule, ButtonComponent, AdjustHeightPipe, ThumbnailPipe]
+  imports: [
+    PlayerComponent,
+    AsyncPipe,
+    FormsModule,
+    InputComponent,
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatExpansionModule,
+    NgTemplateOutlet
+  ],
+  templateUrl: './public.component.html',
+  styleUrl: './public.component.scss',
+  encapsulation: ViewEncapsulation.None
 })
-export class PlayerComponent implements OnInit , AfterViewInit, OnDestroy{
+export class PublicComponent implements OnInit , AfterViewInit, OnDestroy{
 
   youtubeService = inject(YoutubeService);
   youtubeUtil = inject(YoutubeUtil);
   authUser = inject(AuthService).authUser;
   toastService = inject(HotToastService);
-  platform = inject(Platform);
-  domService = inject(DOMService);
+
   videoInfos$ !: Observable<VideoInfo[]>
-  panelOpenState = true;
-  protected safeURL!: SafeResourceUrl;
-  protected currentVideoInfo!: VideoInfo;
+
   private formBuilder = inject(FormBuilder);
 
 
@@ -49,10 +50,7 @@ export class PlayerComponent implements OnInit , AfterViewInit, OnDestroy{
 
   ngOnInit(): void {
     try {
-      this.videoInfos$ = this.youtubeService.getVideos().pipe(tap((videos) => {
-        this.currentVideoInfo = videos[0];
-        this.safeURL = this.youtubeUtil.convertSafeYoutubeUrl(this.currentVideoInfo.videoId);
-      }))
+      this.videoInfos$ = this.youtubeService.getVideos()
     } catch (err) {
       this.toastService.error('Failed to fetch videos.', {position: 'bottom-center'})
     }
@@ -85,13 +83,6 @@ export class PlayerComponent implements OnInit , AfterViewInit, OnDestroy{
       this.handleError('Something went wrong!');
     }
   }
-
-  setCurrentVideo(videInfo: VideoInfo) {
-    this.currentVideoInfo = videInfo;
-    this.safeURL = this.youtubeUtil.convertSafeYoutubeUrl(this.currentVideoInfo.videoId)
-  }
-
-  enablePip = async () => await this.domService.enterPiP({containerId: '#pip_container', pipElementId: '#pip_element'});
 
   private isFormInvalid(): boolean {
     return this.magicForm.invalid;

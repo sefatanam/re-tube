@@ -7,7 +7,7 @@
     <ng-container *ngTemplateOutlet="header_menus"></ng-container>
     <ng-container *ngTemplateOutlet="header_buttons_phone"></ng-container>
   </div>
-  <div>
+  <div id="header_buttons">
     <ng-container *ngTemplateOutlet="header_buttons"></ng-container>
   </div>
 </header>
@@ -16,12 +16,16 @@
 
 <ng-template #header_menus>
   <ul class="header__options header__options--web">
+    <!--TODO: will be remove in future-->
+    <ng-container *ngTemplateOutlet="personal_playlist_route"></ng-container>
     @for (routeMenu of routeMenus;track $index) {
-      <li class="header__options--item" title="{{routeMenu.name}}">
-        <app-button>
-          <a [routerLink]="routeMenu.route">{{ routeMenu.name }}</a>
-        </app-button>
-      </li>
+      @if (routeMenu.isAvailable) {
+        <li class="header__options--item" title="{{routeMenu.name}}">
+          <app-button>
+            <a [routerLink]="routeMenu.route" [queryParams]="routeMenu?.queryParams">{{ routeMenu.name }}</a>
+          </app-button>
+        </li>
+      }
     } @empty {
       <li class="header__options--item">
         <a routerLink="#">{{ emptyMessage }}</a>
@@ -52,9 +56,12 @@
 
 <ng-template #route_buttons_container>
   @for (routeButton of routeButtons;track $index) {
-    <li title="{{routeButton.name}}">
-      <a mat-raised-button color="accent" [routerLink]="routeButton.route">{{ routeButton.name }}</a>
-    </li>
+    @if (routeButton.isAvailable) {
+      <li title="{{routeButton.name}}">
+        <a mat-raised-button color="accent" [routerLink]="routeButton.route"
+           [queryParams]="routeButton?.queryParams">{{ routeButton.name }}</a>
+      </li>
+    }
   } @empty {
     <li>
       <a mat-raised-button color="accent" routerLink="#">{{ emptyMessage }}</a>
@@ -88,7 +95,7 @@
 
 <ng-template #auth_Buttons>
   <li title="Go to Public Playlist">
-    <a mat-raised-button color="accent" routerLink="player" class="flex items-center gap-2">
+    <a mat-raised-button color="accent" routerLink="public" class="flex items-center gap-2">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
            stroke="currentColor" class="w-6 h-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
@@ -115,12 +122,23 @@
       }
     </app-button>
   </li>
-    <li title="Log Out" class="logout-button">
+  <li title="Log Out" class="logout-button">
+    <app-button>
+      <svg (click)="kickOut()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+           stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9"/>
+      </svg>
+    </app-button>
+  </li>
+</ng-template>
+
+
+<ng-template #personal_playlist_route>
+  @if(authService.authUser(); as authUser){
+    <li class="header__options--item" title="Personal Playlist">
       <app-button>
-        <svg (click)="kickOut()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-             stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9"/>
-        </svg>
+        <a  routerLink="/personal" [queryParams]="{uid: authUser?.uid}">Personal</a>
       </app-button>
     </li>
+  }
 </ng-template>

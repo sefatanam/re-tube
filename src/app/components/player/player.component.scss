@@ -1,11 +1,7 @@
-@import "../../../styles/media.scss";
+@import "../../../styles/media";
 
 .accordion-title {
   @apply font-semibold;
-}
-
-:host mat-expansion-panel {
-  --mat-expansion-container-shape: 0.75rem;
 }
 
 :host {
@@ -121,31 +117,5 @@
 @include for-web {
   .player-list-wrapper {
     @apply w-1/3;
-  }
-}
-
-// Temporary
-
-.player-limited {
-  @apply grid gap-4 row-start-2 mt-10;
-  &-text {
-    @apply text-xs italic;
-  }
-  &-title {
-    @apply font-semibold;
-  }
-  form {
-    @apply grid gap-2;
-  }
-}
-
-@include for-web {
-  .player-limited {
-    @apply bg-greenish dark:bg-black rounded-xl p-4 w-2/3;
-    form {
-      button {
-        @apply w-1/5;
-      }
-    }
   }
 }

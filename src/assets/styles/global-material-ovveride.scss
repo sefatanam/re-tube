@@ -17,3 +17,7 @@
 .mat-mdc-form-field-error-wrapper {
   padding: 0 !important;
 }
+
+mat-expansion-panel {
+  --mat-expansion-container-shape: 0.75rem;
+}

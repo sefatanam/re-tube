@@ -65,3 +65,12 @@
     }
   }
 }
+
+.logout-button{
+  @include for-phone{
+    @apply hidden;
+  }
+  @include for-web{
+    @apply block;
+  }
+}

@@ -7,6 +7,7 @@ import { ButtonComponent } from "../button/button.component";
 import { User } from 'firebase/auth';
 import { AuthService } from 'services/auth.service';
 import { environment } from 'environments/environment.dev';
+import {Platform} from "@angular/cdk/platform";
 
 @Component({
   selector: 'app-header',

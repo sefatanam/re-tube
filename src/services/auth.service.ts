@@ -1,8 +1,18 @@
-import { Platform } from '@angular/cdk/platform';
-import { Injectable, inject, signal } from '@angular/core';
-import { Router } from '@angular/router';
-import { HotToastService } from '@ngneat/hot-toast';
-import { getAuth, signInWithPopup, GoogleAuthProvider, User, setPersistence, indexedDBLocalPersistence, signOut, Auth, signInWithRedirect } from "firebase/auth";
+import {Platform} from '@angular/cdk/platform';
+import {inject, Injectable, signal} from '@angular/core';
+import {Router} from '@angular/router';
+import {HotToastService} from '@ngneat/hot-toast';
+import {
+  Auth,
+  getAuth,
+  GoogleAuthProvider,
+  indexedDBLocalPersistence,
+  setPersistence,
+  signInWithPopup,
+  signInWithRedirect,
+  signOut,
+  User
+} from "firebase/auth";
 
 const provider = new GoogleAuthProvider();
 
@@ -15,78 +25,75 @@ export class AuthService {
   toastService = inject(HotToastService);
   platform = inject(Platform)
 
-  continue() {
+  async continue() {
     const auth = getAuth();
-    console.log(this.platform.ANDROID, this.platform.EDGE)
-    setPersistence(auth, indexedDBLocalPersistence).then(() => {
+    try {
+      await setPersistence(auth, indexedDBLocalPersistence);
       if (this.platform.ANDROID || this.platform.IOS) {
-        this.inPhoneSignInWithRedirect(auth);
+        await this.inPhoneSignInWithRedirect(auth);
       } else {
-        this.inWebSignInWithPopUp(auth)
+        await this.inWebSignInWithPopUp(auth)
       }
-    }).catch((err) => {
-      console.error(err);
-      this.toastService.error(`Something went wrong`, { position: 'bottom-center' })
-    })
+    } catch (e) {
+      console.error(e);
+      this.toastService.error(`Something went wrong`, {position: 'bottom-center'})
+    }
   }
 
-  signOut() {
-    const auth = getAuth();
-    signOut(auth)
-      .then(() => {
-        this.authUser.set(null);
-        this.toastService.success(`Successfully Log Out`, { position: 'bottom-center' })
-      })
-      .catch((error) => {
-        this.toastService.error(`Something went wrong`, { position: 'bottom-center' })
-      })
+  async signOut() {
+    try {
+      const auth = getAuth();
+      await signOut(auth);
+      this.authUser.set(null);
+      this.toastService.success(`Successfully Log Out`, {position: 'bottom-center'})
+    } catch (e) {
+      this.toastService.error(`Something went wrong`, {position: 'bottom-center'})
+    }
   }
 
 
-  private inWebSignInWithPopUp(auth: Auth) {
-    signInWithPopup(auth, provider)
-      .then((result: any) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        // const credential = GoogleAuthProvider.credentialFromResult(result);
-        // const token = credential!.accessToken;
+  private async inWebSignInWithPopUp(auth: Auth) {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      if (result) {
         const user = result.user;
         this.authUser.set(user);
-        this.router.navigateByUrl('/player')
-      }).catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-        console.error(error);
-        this.toastService.error(`Something went wrong. Please try later.`, { position: 'bottom-center' })
-      });
+        await this.router.navigateByUrl('/player')
+      }
+    } catch (error: any) {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.customData.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
+      // ...
+      console.error(error);
+      this.toastService.error(`Something went wrong. Please try later.`, {position: 'bottom-center'})
+
+    }
   }
 
-  private inPhoneSignInWithRedirect(auth: Auth) {
-    signInWithRedirect(auth, provider)
-      .then((result: any) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        // const credential = GoogleAuthProvider.credentialFromResult(result);
-        // const token = credential!.accessToken;
+  private async inPhoneSignInWithRedirect(auth: Auth) {
+    try {
+      const result = await signInWithRedirect(auth, provider) as any;
+      if (result && result['user']) {
         const user = result.user;
         this.authUser.set(user);
-        this.router.navigateByUrl('/player')
-      }).catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-        console.error(error);
-        this.toastService.error(`Something went wrong. Please try later.`, { position: 'bottom-center' })
-      });
+        await this.router.navigateByUrl('/player')
+      }
+    } catch (error: any) {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.customData.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
+      console.error(error);
+      this.toastService.error(`Something went wrong. Please try later.`, {position: 'bottom-center'})
+    }
   }
 }
 

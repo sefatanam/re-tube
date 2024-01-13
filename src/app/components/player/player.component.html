@@ -1,18 +1,16 @@
 <section class="player-wrapper" #player_wrapper>
   <div class="player-src" id="pip_container">
-    <!-- <iframe width="100%" height="100%" src="https://www.youtube.com/embed/zXiQZkrJFnA"></iframe> -->
     <iframe id="pip_element" allow="picture-in-picture; autoplay; clipboard-write; gyroscope" *ngIf="safeURL"
-            width="100%" height="100%" [src]="safeURL" allowfullscreen="allowfullscreen"
-            mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen"
-            oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>
+            width="100%" height="100%" [src]="safeURL" allowfullscreen
+            webkitallowfullscreen></iframe>
   </div>
   <div class="player-info">
-    @if (currentVideoInfo) {
-      <div class="info">
+    <div class="info">
+      @if (currentVideoInfo) {
         <h4 class="player-info-title">{{ currentVideoInfo.title }}</h4>
-        <ng-container *ngTemplateOutlet="limited_accordion"></ng-container>
-      </div>
-    }
+      }
+      <ng-content select="form-slot"></ng-content>
+    </div>
     @if (platform.BLINK && !platform.ANDROID && !platform.IOS) {
       <div class="actions">
         <button mat-button (click)="enablePip()">
@@ -31,42 +29,7 @@
 </div>
 
 
-<ng-template #limited_accordion>
-  <mat-accordion>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <p class="accordion-title">
-          @if (!authUser()) {
-            Unlock a feature by login
-          } @else {
-            Add your favourite video to public playlist
-          }
-        </p>
-      </mat-expansion-panel-header>
-      @if (authUser()) {
-        <ng-container *ngTemplateOutlet="limited_feature"></ng-container>
-      }
-    </mat-expansion-panel>
-  </mat-accordion>
-</ng-template>
-
-
-<ng-template #limited_feature>
-  <div class="player-limited">
-    <p class="player-limited-text">More feature's are comming soon!</p>
-    <!-- <h4 class="player-limited-title">You can add any of your favourite video</h4> -->
-    @if (magicForm) {
-      <form [formGroup]="magicForm" data-cy="form-group" class="player-limited-form" (ngSubmit)="submit()">
-        <app-input formControlName="title" placeholder="Naruto Shippuden" label="Title" data-cy="title"></app-input>
-        <app-input formControlName="videoId" placeholder="https://youtu.be/8ofCZObsnOo?list=RDgW2hE-DRx7Q"
-                   label="Youtube Video link" data-cy="videoId"></app-input>
-        <button mat-raised-button type="submit" color="accent" [disabled]="magicForm.invalid"> Submit</button>
-      </form>
-    }
-  </div>
-</ng-template>
-
-
+<!--Videos List Template-->
 <ng-template #player_playlist>
   <mat-accordion class="mat-accordion-custom">
     <mat-expansion-panel (opened)="panelOpenState = true" [expanded]="panelOpenState"
@@ -80,7 +43,7 @@
       </mat-expansion-panel-header>
       <div class="player-list-container">
         <ul class="player-list-items">
-          @if (videoInfos$|async;as videos) {
+          @if (videos) {
             @for (item of videos;track $index) {
               <li title="{{item?.title}}" class="player-list-item"
                   [class.active]="item.videoId===currentVideoInfo.videoId" (click)="setCurrentVideo(item)">

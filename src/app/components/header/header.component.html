@@ -95,7 +95,7 @@
 
 <ng-template #auth_Buttons>
   <li title="Go to Public Playlist">
-    <a mat-raised-button color="accent" routerLink="player" class="flex items-center gap-2">
+    <a mat-raised-button color="accent" routerLink="public" class="flex items-center gap-2">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
            stroke="currentColor" class="w-6 h-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
@@ -137,7 +137,7 @@
   @if(authService.authUser(); as authUser){
     <li class="header__options--item" title="Personal Playlist">
       <app-button>
-        <a  routerLink="/player" [queryParams]="{uid: authUser?.uid}">Personal</a>
+        <a  routerLink="/personal" [queryParams]="{uid: authUser?.uid}">Personal</a>
       </app-button>
     </li>
   }

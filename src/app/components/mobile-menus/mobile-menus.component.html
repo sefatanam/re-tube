@@ -3,7 +3,7 @@
     @if (authService.authUser();as authUser) {
       <li class="mobile__menus--item">
         <app-button>
-          <a routerLink="/player" [queryParams]="{uid: authUser?.uid}">Personal</a>
+          <a routerLink="/personal" [queryParams]="{uid: authUser?.uid}">Personal</a>
         </app-button>
       </li>
     }

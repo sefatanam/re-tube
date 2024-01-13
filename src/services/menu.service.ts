@@ -33,7 +33,7 @@ export class MenuService {
       },
       {
         name: 'Public',
-        route: '/player',
+        route: '/public',
         isAvailable: true
       },
       // TODO: will be used from here in future

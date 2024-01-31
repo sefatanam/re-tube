@@ -1,19 +1,26 @@
-import {YOUTUBE_URL_REGEX} from "@validators/youtube.validators";
-import {inject, Injectable} from "@angular/core";
-import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
-import {VideoInfo} from "@interface/video-info.interface";
+import { YOUTUBE_URL_REGEX, youtubeUrlValidator } from "@validators/youtube.validators";
+import { inject, Injectable } from "@angular/core";
+import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
+import { VideoInfo } from "@interface/video-info.interface";
+import { User } from "firebase/auth";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 
+export type FromStatus<T extends boolean> = {
+  data: T extends true ? VideoInfo : null,
+  isValid: T,
+  error: T extends false ? string : null
+}
 
-@Injectable({providedIn: "root"})
+@Injectable({ providedIn: "root" })
 export class YoutubeUtil {
-  sanitizer = inject(DomSanitizer);
+  private sanitizer = inject(DomSanitizer);
 
-  public extractYouTubeVideoId(url: any): string | false {
+  public extractYouTubeVideoId(url: string): string {
     const match = url.match(YOUTUBE_URL_REGEX);
     if (match && match[1]) {
       return match[1];
     }
-    return false;
+    throw new Error('Video URL not able to parse.')
   }
 
   public convertSafeYoutubeUrl(videoId: string): SafeResourceUrl {
@@ -21,8 +28,38 @@ export class YoutubeUtil {
   }
 
   public generateVideoInfoId(videoInfo: VideoInfo): string {
-    const {videoId} = videoInfo;
+    const { videoId } = videoInfo;
     const uniqueString = `${videoId}_${Date.now()}`;
     return `uid_${uniqueString}`;
+  }
+
+  public async getValidVideoInfoFromForm(form: FormGroup, user: User): Promise<FromStatus<boolean>> {
+    try {
+      if (form.invalid) {
+        return { error: 'Form is not valid', data: null, isValid: false } as FromStatus<false>
+      }
+      const videoInfo = this.createVideoInfo(form, user);
+      if (!videoInfo) {
+        return { error: 'Something went wrong!.', data: null, isValid: false } as FromStatus<false>
+      }
+      return { data: videoInfo, isValid: true, error: null } as FromStatus<true>
+
+    } catch (error: any) {
+      return { error: String(error).toString(), isValid: false, data: null } as FromStatus<false>;
+    }
+  }
+
+
+  private createVideoInfo(form: FormGroup, authUser: User): VideoInfo | false {
+    const { uid, displayName } = authUser;
+    const { title, videoId } = form.value;
+    if (!uid || !displayName || !title || !videoId) return false;
+
+    return {
+      videoId: this.extractYouTubeVideoId(videoId),
+      title,
+      userId: uid,
+      userName: displayName,
+    };
   }
 }

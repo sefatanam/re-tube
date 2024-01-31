@@ -11,7 +11,7 @@ import { provideHotToastConfig } from '@ngneat/hot-toast';
 import { PlatformModule } from '@angular/cdk/platform';
 import { initializeApp } from "firebase/app";
 import { initializer } from './tokens/initializer.token';
-import {provideAnimationsAsync} from "@angular/platform-browser/animations/async";
+import { provideAnimationsAsync } from "@angular/platform-browser/animations/async";
 
 initializeApp(environment.firebaseConfig)
 
@@ -33,7 +33,11 @@ export const appConfig: ApplicationConfig = {
       registrationStrategy: 'registerWhenStable:30000'
     }),
     importProvidersFrom(AuthService),
-    provideHotToastConfig(),
+    provideHotToastConfig(
+      {
+        position: 'bottom-center'
+      }
+    ),
     importProvidersFrom(PlatformModule),
   ],
 };

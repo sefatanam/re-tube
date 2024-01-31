@@ -1,10 +1,12 @@
 import { Routes } from '@angular/router';
 import { authGuard } from '@guards/auth.guard';
+import { userGuard } from '@guards/user.guard';
 
 export const routes: Routes = [
     {
         path: 'personal',
-        loadComponent: () => import('./pages/personal/personal.component').then(c => c.PersonalComponent)
+        loadComponent: () => import('./pages/personal/personal.component').then(c => c.PersonalComponent),
+        canActivate: [userGuard]
     },
     {
         path: 'public',

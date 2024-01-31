@@ -7,14 +7,14 @@
       <mat-expansion-panel-header>
         <p class="accordion-title">
           @if (!authUser()) {
-            Unlock a feature by login
+          Unlock a feature by login
           } @else {
-            Add your favourite video to public playlist
+          Add your favourite video to public playlist
           }
         </p>
       </mat-expansion-panel-header>
       @if (authUser()) {
-        <ng-container *ngTemplateOutlet="public_form"></ng-container>
+      <ng-container *ngTemplateOutlet="public_form"></ng-container>
       }
     </mat-expansion-panel>
   </mat-accordion>
@@ -22,14 +22,13 @@
 
 <ng-template #public_form>
   <div class="player-limited">
-    @if (magicForm) {
-      <form [formGroup]="magicForm" data-cy="form-group" class="player-limited-form" (ngSubmit)="submit()">
-        <app-input formControlName="title" placeholder="Naruto Shippuden" label="Title" data-cy="title"></app-input>
-        <app-input formControlName="videoId" placeholder="https://youtu.be/8ofCZObsnOo?list=RDgW2hE-DRx7Q"
-                   label="Youtube Video link" data-cy="videoId"></app-input>
-        <button mat-raised-button type="submit" color="accent" [disabled]="magicForm.invalid"> Submit</button>
-      </form>
+    @if (publicForm) {
+    <form [formGroup]="publicForm" data-cy="form-group" class="player-limited-form" (ngSubmit)="submit()">
+      <app-input formControlName="title" placeholder="Naruto Shippuden" label="Title" data-cy="title"></app-input>
+      <app-input formControlName="videoId" placeholder="https://youtu.be/8ofCZObsnOo?list=RDgW2hE-DRx7Q"
+        label="Youtube Video link" data-cy="videoId"></app-input>
+      <button mat-raised-button type="submit" color="accent" [disabled]="publicForm.invalid"> Submit</button>
+    </form>
     }
   </div>
 </ng-template>
-

@@ -1,32 +1,38 @@
 import { Injectable } from '@angular/core';
 import { db } from "../indexDB/db";
 
+// TODO: Will be removed all ts-ignores comment
 @Injectable({
   providedIn: 'root'
 })
 export class DexieService {
 
   private async openDatabase() {
-    return db.open();
+    return await db.open();
   }
 
   async countItems(tableName: string): Promise<number> {
-    return this.openDatabase().then(() => db.table(tableName).count());
+    //@ts-ignore
+    return await this.openDatabase().then(() => db[tableName]?.count());
   }
 
   async getItems<T>(tableName: string): Promise<T[]> {
-    return this.openDatabase().then(() => db.table(tableName).toArray());
+    //@ts-ignore
+    return await this.openDatabase().then(() => db[tableName]?.toArray());
   }
 
   async blukAdd<T>(tableName: string, items: T[]): Promise<void> {
-    return this.openDatabase().then(async () => {
-      await db.table(tableName).bulkAdd(items);
+    return await this.openDatabase().then(async () => {
+      // @ts-ignore
+      await db[tableName]?.bulkAdd(items);
     });
   }
 
   async clearTable(tableName: string): Promise<void> {
-    return this.openDatabase().then(async () => {
-      await db.table(tableName).clear();
+    return await this.openDatabase().then(async () => {
+      // @ts-ignore
+      await db[tableName]?.clear();
+
     });
   }
 }

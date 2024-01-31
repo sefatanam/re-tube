@@ -1,18 +1,18 @@
-import {AfterViewInit, Component, inject, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {PlayerComponent} from "@components/player/player.component";
-import {YoutubeService} from "@services/youtube.service";
-import {YoutubeUtil} from "@utils/youtube.util";
-import {AuthService} from "@services/auth.service";
-import {HotToastService} from "@ngneat/hot-toast";
-import {Observable} from "rxjs";
-import {VideoInfo} from "@interface/video-info.interface";
-import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {youtubeUrlValidator} from "@validators/youtube.validators";
-import {User} from "firebase/auth";
-import {AsyncPipe, NgTemplateOutlet} from "@angular/common";
-import {InputComponent} from "@components/input/input.component";
-import {MatButtonModule} from "@angular/material/button";
-import {MatExpansionModule} from "@angular/material/expansion";
+import { AfterViewInit, Component, inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { PlayerComponent } from "@components/player/player.component";
+import { YoutubeService } from "@services/youtube.service";
+import { YoutubeUtil } from "@utils/youtube.util";
+import { AuthService } from "@services/auth.service";
+import { HotToastService } from "@ngneat/hot-toast";
+import { Observable } from "rxjs";
+import { VideoInfo } from "@interface/video-info.interface";
+import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import { youtubeUrlValidator } from "@validators/youtube.validators";
+import { User } from "firebase/auth";
+import { AsyncPipe, NgTemplateOutlet } from "@angular/common";
+import { InputComponent } from "@components/input/input.component";
+import { MatButtonModule } from "@angular/material/button";
+import { MatExpansionModule } from "@angular/material/expansion";
 
 @Component({
   selector: 'app-public',
@@ -31,7 +31,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
   styleUrl: './public.component.scss',
   encapsulation: ViewEncapsulation.None
 })
-export class PublicComponent implements OnInit , AfterViewInit, OnDestroy{
+export class PublicComponent implements OnInit, AfterViewInit {
 
   youtubeService = inject(YoutubeService);
   youtubeUtil = inject(YoutubeUtil);
@@ -52,7 +52,7 @@ export class PublicComponent implements OnInit , AfterViewInit, OnDestroy{
     try {
       this.videoInfos$ = this.youtubeService.getVideos()
     } catch (err) {
-      this.toastService.error('Failed to fetch videos.', {position: 'bottom-center'})
+      this.toastService.error('Failed to fetch videos.', { position: 'bottom-center' })
     }
   }
 
@@ -78,7 +78,7 @@ export class PublicComponent implements OnInit , AfterViewInit, OnDestroy{
       }
       await this.youtubeService.saveVideo(videoInfo);
       this.resetForm();
-      this.toastService.success('Added to public playlist', {position: 'bottom-center'});
+      this.toastService.success('Added to public playlist', { position: 'bottom-center' });
     } catch (error) {
       this.handleError('Something went wrong!');
     }
@@ -89,20 +89,20 @@ export class PublicComponent implements OnInit , AfterViewInit, OnDestroy{
   }
 
   private extractVideoIdFromForm(): string | false {
-    const {videoId} = this.magicForm.value;
+    const { videoId } = this.magicForm.value;
     if (!videoId) return false;
     return this.youtubeUtil.extractYouTubeVideoId(videoId);
   }
 
   private isValidTitleAndDisplayName(): boolean {
-    const {title} = this.magicForm.value;
+    const { title } = this.magicForm.value;
     const displayName = this.authUser()?.displayName
     return !!title && !!displayName;
   }
 
   private createVideoInfo(extractedVideoId: string, authUser: User): VideoInfo | false {
-    const {uid, displayName} = authUser;
-    const {title} = this.magicForm.value;
+    const { uid, displayName } = authUser;
+    const { title } = this.magicForm.value;
     if (!uid || !displayName || !title) return false;
 
     return {
@@ -118,14 +118,11 @@ export class PublicComponent implements OnInit , AfterViewInit, OnDestroy{
   }
 
   private handleError(message: string): void {
-    this.toastService.error(message, {position: 'bottom-center'});
+    this.toastService.error(message, { position: 'bottom-center' });
   }
 
 
   async ngAfterViewInit() {
     await this.youtubeService.videosRealtimeUpdateInit()
-  }
-
-  ngOnDestroy(): void {
   }
 }

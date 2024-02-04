@@ -1,14 +1,15 @@
 import { inject, Injectable } from '@angular/core';
 import { collection, collectionData, doc, Firestore, setDoc, query, where, onSnapshot } from '@angular/fire/firestore';
-import { VideoInfo } from "@interface/video-info.interface";
-import { from, Observable, switchMap, tap } from "rxjs";
+import { VideoInfo, VideoInfoResponse } from "@interface/video-info.interface";
+import { from, Observable, switchMap, tap, map } from "rxjs";
 import { YoutubeUtil } from "@utils/youtube.util";
 import { db } from "../indexDB/db";
 import firebase from "firebase/compat";
 import Unsubscribe = firebase.Unsubscribe;
+import { addDoc } from 'firebase/firestore';
 
 const COLLECTION_NAME = 'videos';
-
+type VideoDBType = 'publicVideos' | 'privateVideos';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,64 +21,67 @@ export class YoutubeService {
   async videosRealtimeUpdateInit() {
     const q = query(collection(this.firestore, COLLECTION_NAME));
     onSnapshot(q, async (snapshot) => {
-      if (snapshot.docs.length > await this.countVideos()) {
-        this.clearCache();
-        this.getVideos();
+      if (snapshot.docs.length > await this.countVideos('publicVideos')) {
+        this.clearCache('publicVideos');
+        this.getVideos(COLLECTION_NAME, 'publicVideos');
       }
     });
   }
 
-  getVideos(): Observable<VideoInfo[]> {
-    return from(this.countVideos()).pipe(
+  getVideos(collectioName: string, dbType: VideoDBType): Observable<VideoInfoResponse[]> {
+    return from(this.countVideos(dbType)).pipe(
       switchMap((count) => {
         if (count > 0) {
-          return from(this.getCacheVideos());
+          return from(this.getCacheVideos(dbType));
         } else {
-          const aCollection = collection(this.firestore, COLLECTION_NAME);
-          return collectionData(aCollection) as Observable<VideoInfo[]>;
+          const aCollection = collection(this.firestore, collectioName);
+          return (collectionData(aCollection) as Observable<VideoInfo[]>).pipe(
+            tap(console.log),
+            map((response: VideoInfo[]) => response.map((d) => ({ videoId: d.videoId, title: d.title })))
+          );
         }
       }),
       tap(async (videos) => {
-        await this.clearCache();
+        await this.clearCache(dbType);
         if (Array.isArray(videos)) {
-          await this.addVideosToCache(videos);
+          await this.addVideosToCache(videos, dbType);
         }
       })
     );
   }
 
+
   videoRealtimeUpdateDestroy() {
     this.destroyVideosSnapshot()
   }
 
-  async saveVideo(videoInfo: VideoInfo) {
-    const docId = this.youtubeUtil.generateVideoInfoId(videoInfo);
-    await setDoc(doc(this.firestore, COLLECTION_NAME, docId), videoInfo)
+  async saveVideo(videoInfo: VideoInfo, collectionName: string): Promise<void> {
+    const collectionRef = collection(this.firestore, collectionName);
+    await addDoc(collectionRef, videoInfo);
   }
 
-  private async countVideos() {
+  private async countVideos(dbType: VideoDBType) {
     return db.open().then(() => {
-      return db.videos.count();
+      return db[dbType].count();
     })
 
   }
 
-  private async getCacheVideos() {
+  private async getCacheVideos(dbType: VideoDBType) {
     return db.open().then(() => {
-      return db.videos.toArray();
-    })
-
-  }
-
-  private async addVideosToCache(videos: VideoInfo[]) {
-    return db.open().then(async () => {
-      await db.videos.bulkAdd(videos);
+      return db[dbType].toArray();
     })
   }
 
-  private async clearCache() {
+  private async addVideosToCache(videos: VideoInfoResponse[], dbType: VideoDBType) {
     return db.open().then(async () => {
-      await db.videos.clear()
+      await db[dbType].bulkAdd(videos);
+    })
+  }
+
+  private async clearCache(dbType: VideoDBType) {
+    return db.open().then(async () => {
+      await db[dbType].clear()
     })
   }
 }

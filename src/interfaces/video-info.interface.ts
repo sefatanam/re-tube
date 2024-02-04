@@ -4,3 +4,5 @@ export interface VideoInfo {
   title: string;
   userName: string;
 }
+
+export type VideoInfoResponse = Omit<VideoInfo, 'userName' | 'userId'>

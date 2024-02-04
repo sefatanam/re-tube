@@ -1,7 +1,7 @@
-import {Platform} from '@angular/cdk/platform';
-import {inject, Injectable, signal} from '@angular/core';
-import {Router} from '@angular/router';
-import {HotToastService} from '@ngneat/hot-toast';
+import { Platform } from '@angular/cdk/platform';
+import { inject, Injectable, signal } from '@angular/core';
+import { Router } from '@angular/router';
+import { HotToastService } from '@ngneat/hot-toast';
 import {
   Auth,
   getAuth,
@@ -13,6 +13,7 @@ import {
   signOut,
   User
 } from "firebase/auth";
+import { db } from 'indexDB/db';
 
 const provider = new GoogleAuthProvider();
 
@@ -36,7 +37,7 @@ export class AuthService {
       }
     } catch (e) {
       console.error(e);
-      this.toastService.error(`Something went wrong`, {position: 'bottom-center'})
+      this.toastService.error(`Something went wrong`, { position: 'bottom-center' })
     }
   }
 
@@ -45,9 +46,15 @@ export class AuthService {
       const auth = getAuth();
       await signOut(auth);
       this.authUser.set(null);
-      this.toastService.success(`Successfully Log Out`, {position: 'bottom-center'})
+      this.toastService.success(`Successfully Log Out`, { position: 'bottom-center' });
     } catch (e) {
-      this.toastService.error(`Something went wrong`, {position: 'bottom-center'})
+      this.toastService.error(`Something went wrong`, { position: 'bottom-center' })
+    } finally {
+      /**
+       * TODO: Perform user data persistance cleanup
+       */
+      this.router.navigateByUrl('/public');
+      db.privateVideos.clear()
     }
   }
 
@@ -58,7 +65,7 @@ export class AuthService {
       if (result) {
         const user = result.user;
         this.authUser.set(user);
-        await this.router.navigateByUrl('/player')
+        await this.router.navigateByUrl('/public')
       }
     } catch (error: any) {
       // Handle Errors here.
@@ -70,7 +77,7 @@ export class AuthService {
       const credential = GoogleAuthProvider.credentialFromError(error);
       // ...
       console.error(error);
-      this.toastService.error(`Something went wrong. Please try later.`, {position: 'bottom-center'})
+      this.toastService.error(`Something went wrong. Please try later.`, { position: 'bottom-center' })
 
     }
   }
@@ -92,7 +99,7 @@ export class AuthService {
       // The AuthCredential type that was used.
       const credential = GoogleAuthProvider.credentialFromError(error);
       console.error(error);
-      this.toastService.error(`Something went wrong. Please try later.`, {position: 'bottom-center'})
+      this.toastService.error(`Something went wrong. Please try later.`, { position: 'bottom-center' })
     }
   }
 }

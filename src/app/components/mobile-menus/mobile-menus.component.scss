@@ -1,9 +1,17 @@
-.menus-wrapper{
-    @apply h-dvh flex flex-col justify-between;
+.menus-wrapper {
+  @apply h-dvh flex flex-col justify-between py-8;
 }
-.mobile__menus{
-    @apply flex flex-col;
-    &--item{
-        @apply flex items-center p-2;
-    }
+.mobile__menus {
+  @apply flex flex-col;
+  &--item {
+    @apply flex items-center p-2;
+  }
+}
+
+.title {
+  overflow-wrap: break-word;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  --tw-text-opacity: 1;
 }

@@ -3,7 +3,7 @@
 </app-player>
 <ng-template #form_accordion>
   <mat-accordion>
-    <mat-expansion-panel>
+    <mat-expansion-panel #panel (click)="$event.stopPropagation()">
       <mat-expansion-panel-header>
         <p class="accordion-title">
           @if (!authUser()) {

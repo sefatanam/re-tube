@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, HostListener, inject, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { PlayerComponent } from "@components/player/player.component";
 import { YoutubeService } from "@services/youtube.service";
 import { YoutubeUtil } from "@utils/youtube.util";
@@ -10,7 +10,7 @@ import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators 
 import { AsyncPipe, NgTemplateOutlet } from "@angular/common";
 import { InputComponent } from "@components/input/input.component";
 import { MatButtonModule } from "@angular/material/button";
-import { MatExpansionModule } from "@angular/material/expansion";
+import { MatExpansionModule, MatExpansionPanel } from "@angular/material/expansion";
 import { youtubeUrlValidator } from '@validators/youtube.validators';
 
 @Component({
@@ -32,6 +32,7 @@ import { youtubeUrlValidator } from '@validators/youtube.validators';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PublicComponent implements OnInit, AfterViewInit {
+  @ViewChild('panel') panel!: MatExpansionPanel;
 
   youtubeService = inject(YoutubeService);
   youtubeUtil = inject(YoutubeUtil);
@@ -47,6 +48,7 @@ export class PublicComponent implements OnInit, AfterViewInit {
     title: new FormControl('', [Validators.required, Validators.minLength(3)]),
     videoId: new FormControl('', [Validators.required, youtubeUrlValidator()]),
   })
+  shouldExpand: unknown;
 
   ngOnInit(): void {
     try {
@@ -77,5 +79,16 @@ export class PublicComponent implements OnInit, AfterViewInit {
 
   async ngAfterViewInit() {
     await this.youtubeService.videosRealtimeUpdateInit()
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    // @ts-ignore
+    if (!this.panel._body.nativeElement.contains(event.target)) {
+      // Close the expansion panel if it's open
+      if (this.panel.expanded) {
+        this.panel.close();
+      }
+    }
   }
 }

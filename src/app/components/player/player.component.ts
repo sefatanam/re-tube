@@ -8,7 +8,7 @@ import { ThumbnailPipe } from "../../../pipes/thumbnail.pipe";
 import { DOMService } from "@services/dom.service";
 import { InputComponent } from "@components/input/input.component";
 import { ButtonComponent } from "@components/button/button.component";
-import { VideoInfo, VideoInfoResponse } from "@interface/video-info.interface";
+import { VideoInfoResponse } from "@interface/video-info.interface";
 import { Platform } from "@angular/cdk/platform";
 import { SafeResourceUrl } from "@angular/platform-browser";
 import { YoutubeUtil } from "@utils/youtube.util";
@@ -41,6 +41,7 @@ export class PlayerComponent implements OnChanges {
   enablePip = async () => await this.domService.enterPiP({ containerId: '#pip_container', pipElementId: '#pip_element' });
 
   setCurrentVideo(videInfo: VideoInfoResponse) {
+    if (!videInfo) return;
     this.currentVideoInfo = videInfo;
     this.safeURL = this.youtubeUtil.convertSafeYoutubeUrl(this.currentVideoInfo.videoId)
   }

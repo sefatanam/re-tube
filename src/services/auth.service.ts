@@ -13,6 +13,7 @@ import {
   signOut,
   User
 } from "firebase/auth";
+import { db } from 'indexDB/db';
 
 const provider = new GoogleAuthProvider();
 
@@ -45,9 +46,15 @@ export class AuthService {
       const auth = getAuth();
       await signOut(auth);
       this.authUser.set(null);
-      this.toastService.success(`Successfully Log Out`, { position: 'bottom-center' })
+      this.toastService.success(`Successfully Log Out`, { position: 'bottom-center' });
     } catch (e) {
       this.toastService.error(`Something went wrong`, { position: 'bottom-center' })
+    } finally {
+      /**
+       * TODO: Perform user data persistance cleanup
+       */
+      this.router.navigateByUrl('/public');
+      db.privateVideos.clear()
     }
   }
 

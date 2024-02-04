@@ -1,9 +1,11 @@
 @defer {
 <section class="player-wrapper" #player_wrapper>
+  @if(currentVideoInfo){
   <div class="player-src" id="pip_container">
     <iframe id="pip_element" allow="picture-in-picture; autoplay; clipboard-write; gyroscope" *ngIf="safeURL"
       width="100%" height="100%" [src]="safeURL" allowfullscreen webkitallowfullscreen></iframe>
   </div>
+  }
   <div class="player-info">
     <div class="info">
       @if (currentVideoInfo) {

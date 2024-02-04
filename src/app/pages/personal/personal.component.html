@@ -1,4 +1,4 @@
-<app-player [videos]="[]" playlist_title="Personal Playlist">
+<app-player [videos]="videoInfos$ | async" playlist_title="Personal Playlist">
   <ng-container *ngTemplateOutlet="form_accordion" ngProjectAs="form-slot"></ng-container>
 </app-player>
 <ng-template #form_accordion>

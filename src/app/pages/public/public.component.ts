@@ -5,7 +5,7 @@ import { YoutubeUtil } from "@utils/youtube.util";
 import { AuthService } from "@services/auth.service";
 import { HotToastService } from "@ngneat/hot-toast";
 import { Observable } from "rxjs";
-import { VideoInfo } from "@interface/video-info.interface";
+import { VideoInfoResponse } from "@interface/video-info.interface";
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
 import { AsyncPipe, NgTemplateOutlet } from "@angular/common";
 import { InputComponent } from "@components/input/input.component";
@@ -38,7 +38,7 @@ export class PublicComponent implements OnInit, AfterViewInit {
   authUser = inject(AuthService).authUser;
   toastService = inject(HotToastService);
 
-  videoInfos$ !: Observable<VideoInfo[]>;
+  videoInfos$ !: Observable<VideoInfoResponse[]>;
   private formBuilder = inject(FormBuilder);
 
 
@@ -50,7 +50,7 @@ export class PublicComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     try {
-      this.videoInfos$ = this.youtubeService.getVideos()
+      this.videoInfos$ = this.youtubeService.getVideos('videos', 'publicVideos')
     } catch (err) {
       this.toastService.error('Failed to fetch videos.')
     }
@@ -69,7 +69,7 @@ export class PublicComponent implements OnInit, AfterViewInit {
     }
 
     if (validateVideoInfo.isValid && validateVideoInfo.data) {
-      await this.youtubeService.saveVideo(validateVideoInfo.data);
+      await this.youtubeService.saveVideo(validateVideoInfo.data, 'videos');
       this.publicForm.reset();
       this.toastService.success('Added to public playlist');
     }

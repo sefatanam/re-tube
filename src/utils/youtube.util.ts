@@ -27,11 +27,6 @@ export class YoutubeUtil {
     return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${videoId}?autoplay=1`)
   }
 
-  public generateVideoInfoId(videoInfo: VideoInfo): string {
-    const { videoId } = videoInfo;
-    const uniqueString = `${videoId}_${Date.now()}`;
-    return `uid_${uniqueString}`;
-  }
 
   public async getValidVideoInfoFromForm(form: FormGroup, user: User): Promise<FromStatus<boolean>> {
     try {

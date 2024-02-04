@@ -1,1 +1,34 @@
-<p>personal works!</p>
+<app-player [videos]="[]" playlist_title="Personal Playlist">
+  <ng-container *ngTemplateOutlet="form_accordion" ngProjectAs="form-slot"></ng-container>
+</app-player>
+<ng-template #form_accordion>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <p class="accordion-title">
+          @if (!authUser()) {
+          Login to add videos to private playlist
+          } @else {
+          Add your favourite video to private playlist
+          }
+        </p>
+      </mat-expansion-panel-header>
+      @if (authUser()) {
+      <ng-container *ngTemplateOutlet="private_form"></ng-container>
+      }
+    </mat-expansion-panel>
+  </mat-accordion>
+</ng-template>
+
+<ng-template #private_form>
+  <div class="player-limited">
+    @if (privateForm) {
+    <form [formGroup]="privateForm" data-cy="form-group" class="player-limited-form" (ngSubmit)="submit()">
+      <app-input formControlName="title" placeholder="Naruto Shippuden" label="Title" data-cy="title"></app-input>
+      <app-input formControlName="videoId" placeholder="https://youtu.be/8ofCZObsnOo?list=RDgW2hE-DRx7Q"
+        label="Youtube Video link" data-cy="videoId"></app-input>
+      <button mat-raised-button type="submit" color="accent" [disabled]="privateForm.invalid"> Submit</button>
+    </form>
+    }
+  </div>
+</ng-template>

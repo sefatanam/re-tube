@@ -11,7 +11,7 @@
       }
       <ng-content select="form-slot"></ng-content>
     </div>
-    @if (platform.BLINK && !platform.ANDROID && !platform.IOS) {
+    @if (platform.BLINK && !platform.ANDROID && !platform.IOS && videos?.length) {
     <div class="actions">
       <button mat-button (click)="enablePip()">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -27,7 +27,6 @@
 <div class="player-list-wrapper" [style.top]="player_wrapper | adjustHeight">
   <ng-container *ngTemplateOutlet="player_playlist"></ng-container>
 </div>
-
 }
 
 
@@ -39,7 +38,7 @@
       <mat-expansion-panel-header>
         <mat-panel-title>
           <p class="accordion-title">
-            Public playlist
+            {{playlist_title}}
           </p>
         </mat-panel-title>
       </mat-expansion-panel-header>

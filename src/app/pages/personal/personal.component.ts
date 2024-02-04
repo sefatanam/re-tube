@@ -1,7 +1,8 @@
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatExpansionModule } from '@angular/material/expansion';
+import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule, MatExpansionPanel } from '@angular/material/expansion';
 import { InputComponent } from '@components/input/input.component';
 import { PlayerComponent } from '@components/player/player.component';
 import { VideoInfo, VideoInfoResponse } from '@interface/video-info.interface';
@@ -15,12 +16,12 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-personal',
   standalone: true,
-  imports: [PlayerComponent, InputComponent, ReactiveFormsModule, MatExpansionModule, NgTemplateOutlet, AsyncPipe],
+  imports: [PlayerComponent, InputComponent, ReactiveFormsModule, MatExpansionModule, NgTemplateOutlet, AsyncPipe, MatButtonModule],
   templateUrl: './personal.component.html',
   styleUrl: './personal.component.scss'
 })
 export class PersonalComponent implements OnInit {
-
+  @ViewChild('panel') panel!: MatExpansionPanel;
 
   youtubeService = inject(YoutubeService);
   youtubeUtil = inject(YoutubeUtil);
@@ -61,6 +62,17 @@ export class PersonalComponent implements OnInit {
       await this.youtubeService.saveVideo(validateVideoInfo.data, authUser.email);
       this.privateForm.reset();
       this.toastService.success('Added to private playlist');
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    // @ts-ignore
+    if (!this.panel._body.nativeElement.contains(event.target)) {
+      // Close the expansion panel if it's open
+      if (this.panel.expanded) {
+        this.panel.close();
+      }
     }
   }
 }

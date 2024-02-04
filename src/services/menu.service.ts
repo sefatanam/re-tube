@@ -1,6 +1,6 @@
-import {inject, Injectable} from '@angular/core';
-import {Menu} from '@typings/menu.type';
-import {AuthService} from "@services/auth.service";
+import { inject, Injectable } from '@angular/core';
+import { Menu } from '@typings/menu.type';
+import { AuthService } from "@services/auth.service";
 
 
 @Injectable({
@@ -32,7 +32,7 @@ export class MenuService {
         isAvailable: !this.authService.authUser()
       },
       {
-        name: 'Public',
+        name: 'Public Playlist',
         route: '/public',
         isAvailable: true
       },

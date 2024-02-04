@@ -19,17 +19,17 @@
     <!--TODO: will be remove in future-->
     <ng-container *ngTemplateOutlet="personal_playlist_route"></ng-container>
     @for (routeMenu of routeMenus;track $index) {
-      @if (routeMenu.isAvailable) {
-        <li class="header__options--item" title="{{routeMenu.name}}">
-          <app-button>
-            <a [routerLink]="routeMenu.route" [queryParams]="routeMenu?.queryParams">{{ routeMenu.name }}</a>
-          </app-button>
-        </li>
-      }
+    @if (routeMenu.isAvailable) {
+    <li class="header__options--item" title="{{routeMenu.name}}">
+      <app-button>
+        <a [routerLink]="routeMenu.route" [queryParams]="routeMenu?.queryParams">{{ routeMenu.name }}</a>
+      </app-button>
+    </li>
+    }
     } @empty {
-      <li class="header__options--item">
-        <a routerLink="#">{{ emptyMessage }}</a>
-      </li>
+    <li class="header__options--item">
+      <a routerLink="#">{{ emptyMessage }}</a>
+    </li>
     }
   </ul>
 </ng-template>
@@ -37,9 +37,9 @@
 <ng-template #header_buttons>
   <ul class="header__options header__options--web">
     @if (!user()) {
-      <ng-container *ngTemplateOutlet="route_buttons_container"></ng-container>
+    <ng-container *ngTemplateOutlet="route_buttons_container"></ng-container>
     } @else if (user()) {
-      <ng-container *ngTemplateOutlet="auth_Buttons"></ng-container>
+    <ng-container *ngTemplateOutlet="auth_Buttons"></ng-container>
     }
   </ul>
 </ng-template>
@@ -47,40 +47,40 @@
 <ng-template #header_buttons_phone>
   <ul class="header__options header__options--phone">
     @if (!user()) {
-      <ng-container *ngTemplateOutlet="route_buttons_container"></ng-container>
+    <ng-container *ngTemplateOutlet="route_buttons_container"></ng-container>
     } @else if (user()) {
-      <ng-container *ngTemplateOutlet="auth_Buttons"></ng-container>
+    <ng-container *ngTemplateOutlet="auth_Buttons"></ng-container>
     }
   </ul>
 </ng-template>
 
 <ng-template #route_buttons_container>
   @for (routeButton of routeButtons;track $index) {
-    @if (routeButton.isAvailable) {
-      <li title="{{routeButton.name}}">
-        <a mat-raised-button color="accent" [routerLink]="routeButton.route"
-           [queryParams]="routeButton?.queryParams">{{ routeButton.name }}</a>
-      </li>
-    }
+  @if (routeButton.isAvailable) {
+  <li title="{{routeButton.name}}">
+    <a mat-raised-button color="accent" [routerLink]="routeButton.route" [queryParams]="routeButton?.queryParams">{{
+      routeButton.name }}</a>
+  </li>
+  }
   } @empty {
-    <li>
-      <a mat-raised-button color="accent" routerLink="#">{{ emptyMessage }}</a>
-    </li>
+  <li>
+    <a mat-raised-button color="accent" routerLink="#">{{ emptyMessage }}</a>
+  </li>
   }
   <li title="Toggle Theme">
     <a mat-raised-button color="accent" (click)="toggleTheme()">
       @if (isDarkThemeEnable) {
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-             stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round"
-                d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/>
-        </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+        class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+      </svg>
       } @else {
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-             stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round"
-                d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"/>
-        </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+        class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+      </svg>
       }
     </a>
   </li>
@@ -88,19 +88,19 @@
 
 <ng-template #menu_icon>
   <svg title="Open Side Menu" (click)="onMenuClick.emit()" xmlns="http://www.w3.org/2000/svg" fill="none"
-       viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-6 h-6 dark:text-white">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-6 h-6 dark:text-white">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
   </svg>
 </ng-template>
 
 <ng-template #auth_Buttons>
   <li title="Go to Public Playlist">
     <a mat-raised-button color="accent" routerLink="public" class="flex items-center gap-2">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-           stroke="currentColor" class="w-6 h-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+        class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
         <path stroke-linecap="round" stroke-linejoin="round"
-              d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z"/>
+          d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z" />
       </svg>
       <p class="hidden md:block">{{ authService.authUser()?.displayName }}</p>
     </a>
@@ -108,25 +108,25 @@
   <li title="Toggle Theme">
     <app-button>
       @if (isDarkThemeEnable) {
-        <svg (click)="toggleTheme()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-             stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round"
-                d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/>
-        </svg>
+      <svg (click)="toggleTheme()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+        stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+      </svg>
       } @else {
-        <svg (click)="toggleTheme()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-             stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round"
-                d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"/>
-        </svg>
+      <svg (click)="toggleTheme()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+        stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+      </svg>
       }
     </app-button>
   </li>
   <li title="Log Out" class="logout-button">
     <app-button>
-      <svg (click)="kickOut()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-           stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9"/>
+      <svg (click)="kickOut()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+        stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
       </svg>
     </app-button>
   </li>
@@ -135,10 +135,10 @@
 
 <ng-template #personal_playlist_route>
   @if(authService.authUser(); as authUser){
-    <li class="header__options--item" title="Personal Playlist">
-      <app-button>
-        <a  routerLink="/personal" [queryParams]="{uid: authUser?.uid}">Personal</a>
-      </app-button>
-    </li>
+  <li class="header__options--item" title="Personal Playlist">
+    <app-button>
+      <a routerLink="/personal" [queryParams]="{uid: authUser?.uid}">Personal Playlist</a>
+    </app-button>
+  </li>
   }
 </ng-template>

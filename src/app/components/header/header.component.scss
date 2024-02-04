@@ -1,7 +1,7 @@
 @import "../../../styles/media.scss";
 
 @mixin header-common {
-  @apply border-b border-b-gray p-4;
+  @apply p-4;
   .header {
     &__options {
       &--icon {
@@ -66,11 +66,11 @@
   }
 }
 
-.logout-button{
-  @include for-phone{
+.logout-button {
+  @include for-phone {
     @apply hidden;
   }
-  @include for-web{
+  @include for-web {
     @apply block;
   }
 }

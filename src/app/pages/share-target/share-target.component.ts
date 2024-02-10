@@ -34,6 +34,7 @@ export class ShareTargetComponent implements AfterViewInit {
     try {
 
       if (isPlatformBrowser(this.platform)) {
+
         const authUser = this.authService.authUser();
         if (!authUser) {
           this.toaster.info('You are not authorize to perform this action. Please login.')
@@ -41,9 +42,18 @@ export class ShareTargetComponent implements AfterViewInit {
         }
         const { title, text: url } = this.route.snapshot.queryParams;
 
+
         if (!title || !url) {
           this.toaster.info('Shared data is not supported.');
           return;
+        }
+        this.videoInfo = {
+          videoId: 'videoId',
+          title: title,
+          userId: authUser.uid,
+          userName: authUser.displayName ?? authUser.uid,
+          url: JSON.stringify(this.route.snapshot.queryParams),
+
         }
 
         const videoId = this.youtubeUtil.extractYouTubeVideoId(url);

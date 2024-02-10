@@ -1,19 +1,14 @@
 <div class="p-2 grid gap-4 w-96">
-    <pre>
-        {{videoInfo | json}}
-    </pre>
     @if(videoInfo){
     <h1 class="text-md flex gap-1 dark:text-greenish text-dark_gray">
         <span>Add to Personal playlist</span>
     </h1>
-
     <div class="overflow-hidden grid gap-2">
         <div class="h-42  object-cover overflow-hidden rounded-lg border-2 border-dark_gray dark:border-white">
             <img [src]="videoInfo?.videoId | thumbnail" class="h-full w-full object-cover">
         </div>
         <p class="font-medium text-lg">{{videoInfo.title}}</p>
     </div>
-
     <a mat-raised-button color="accent" routerLink="public" class="flex items-center gap-2" (click)="onSave()">
         Save
     </a>

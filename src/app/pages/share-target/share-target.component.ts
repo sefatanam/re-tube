@@ -18,7 +18,7 @@ import { ThumbnailPipe } from 'pipes/thumbnail.pipe';
 })
 export class ShareTargetComponent implements AfterViewInit {
 
-  videoInfo !: VideoInfo & { url?: string };
+  videoInfo !: VideoInfo;
 
   toaster = inject(HotToastService);
   authService = inject(AuthService);
@@ -34,34 +34,21 @@ export class ShareTargetComponent implements AfterViewInit {
     try {
 
       if (isPlatformBrowser(this.platform)) {
-
         const authUser = this.authService.authUser();
         if (!authUser) {
           this.toaster.info('You are not authorize to perform this action. Please login.')
           return;
         }
         const { title, text: url } = this.route.snapshot.queryParams;
-
-
         if (!title || !url) {
           this.toaster.info('Shared data is not supported.');
           return;
         }
-        this.videoInfo = {
-          videoId: 'videoId',
-          title: title,
-          userId: authUser.uid,
-          userName: authUser.displayName ?? authUser.uid,
-          url: JSON.stringify(this.route.snapshot.queryParams),
-
-        }
-
-        const videoId = this.youtubeUtil.extractYouTubeVideoId(url);
+        const videoId = this.youtubeUtil.extractYouTubeVideoIdFromSharedLink(url);
         if (!videoId) {
           this.toaster.info('Shared link is not supported');
           return;
         }
-
         this.videoInfo = {
           videoId: videoId,
           title: title,
@@ -83,7 +70,6 @@ export class ShareTargetComponent implements AfterViewInit {
       this.toaster.info('You are not authorize to perform this action. Please login.')
       return;
     }
-    delete this.videoInfo?.url;
     await this.youtubeService.saveVideo(this.videoInfo, authUser.email);
     await this.youtubeService.clearCache('privateVideos');
     this.toaster.success('Video added to Personal Playlist');

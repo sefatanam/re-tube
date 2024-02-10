@@ -1,4 +1,4 @@
-import { YOUTUBE_URL_REGEX, youtubeUrlValidator } from "@validators/youtube.validators";
+import { SHARED_URL_REGEX, YOUTUBE_URL_REGEX, youtubeUrlValidator } from "@validators/youtube.validators";
 import { inject, Injectable } from "@angular/core";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 import { VideoInfo } from "@interface/video-info.interface";
@@ -17,6 +17,14 @@ export class YoutubeUtil {
 
   public extractYouTubeVideoId(url: string): string {
     const match = url.match(YOUTUBE_URL_REGEX);
+    if (match && match[1]) {
+      return match[1];
+    }
+    throw new Error('Video URL not able to parse.')
+  }
+
+  public extractYouTubeVideoIdFromSharedLink(url: string) {
+    const match = url.match(SHARED_URL_REGEX);
     if (match && match[1]) {
       return match[1];
     }

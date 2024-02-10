@@ -18,7 +18,7 @@ import { ThumbnailPipe } from 'pipes/thumbnail.pipe';
 })
 export class ShareTargetComponent implements AfterViewInit {
 
-  videoInfo !: VideoInfo;
+  videoInfo !: VideoInfo & { url?: string };
 
   toaster = inject(HotToastService);
   authService = inject(AuthService);
@@ -73,6 +73,7 @@ export class ShareTargetComponent implements AfterViewInit {
       this.toaster.info('You are not authorize to perform this action. Please login.')
       return;
     }
+    delete this.videoInfo?.url;
     await this.youtubeService.saveVideo(this.videoInfo, authUser.email);
     await this.youtubeService.clearCache('privateVideos');
     this.toaster.success('Video added to Personal Playlist');

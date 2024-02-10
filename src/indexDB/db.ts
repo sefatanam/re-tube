@@ -10,6 +10,7 @@ export class AppDB extends Dexie {
       publicVideos: 'title',
       privateVideos: 'title'
     })
+
   }
 }
 export const db = new AppDB()

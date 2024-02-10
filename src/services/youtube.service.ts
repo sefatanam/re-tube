@@ -60,9 +60,13 @@ export class YoutubeService {
     await addDoc(collectionRef, videoInfo);
   }
 
-  private async countVideos(dbType: VideoDBType) {
+  private async countVideos(dbType: VideoDBType): Promise<number> {
     return db.open().then(() => {
       return db[dbType].count();
+    }).catch((error: any) => {
+      console.warn(error)
+      db.delete();
+      return 0;
     })
 
   }
@@ -79,9 +83,12 @@ export class YoutubeService {
     })
   }
 
-  private async clearCache(dbType: VideoDBType) {
+  async clearCache(dbType: VideoDBType) {
     return db.open().then(async () => {
       await db[dbType].clear()
+    }).catch((error: any) => {
+      console.warn(error);
+      db.delete()
     })
   }
 }

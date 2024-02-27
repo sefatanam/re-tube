@@ -36,7 +36,6 @@ export class YoutubeService {
         } else {
           const aCollection = collection(this.firestore, collectioName);
           return (collectionData(aCollection) as Observable<VideoInfo[]>).pipe(
-            tap(console.log),
             map((response: VideoInfo[]) => response.map((d) => ({ videoId: d.videoId, title: d.title })))
           );
         }

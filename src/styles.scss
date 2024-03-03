@@ -1,15 +1,4 @@
-:root {
-  --black: #191919;
-  --gray: #e7e7e7;
-  --white: #fff;
-  --black: #000;
-}
-
-html,
-body {
-  font-family: "SF Pro Display", system-ui, sans-serif;
-  transition: background-color 100ms ease-in-out;
-}
+@use "styles/variables";
 
 // Animated Text
 .animated-text {

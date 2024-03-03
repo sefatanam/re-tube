@@ -97,7 +97,7 @@
     }
 
     &-item {
-      @apply flex items-start gap-2 p-2 rounded-xl cursor-pointer  hover:bg-gray hover:dark:bg-dark_gray;
+      @apply flex items-start gap-2 p-2 rounded-xl cursor-pointer  hover:bg-accent-100 hover:dark:bg-accent-200;
 
       img {
         @apply h-[80px] w-[125px] rounded overflow-hidden object-cover;
@@ -108,7 +108,7 @@
       }
 
       &.active {
-        @apply bg-gray dark:bg-dark_gray;
+        @apply bg-accent-100 dark:bg-accent-200;
       }
     }
   }

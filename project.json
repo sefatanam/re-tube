@@ -29,6 +29,11 @@
         "styles": [
           "src/styles.scss",
           {
+            "input": "src/assets/styles/tailwind.scss",
+            "bundleName": "tailwind",
+            "inject": true
+          },
+          {
             "input": "src/assets/styles/main-theme.scss",
             "bundleName": "main-theme",
             "inject": true
@@ -41,11 +46,6 @@
           {
             "input": "src/assets/styles/dark-theme.scss",
             "bundleName": "dark-theme",
-            "inject": true
-          },
-          {
-            "input": "src/assets/styles/tailwind.scss",
-            "bundleName": "tailwind",
             "inject": true
           },
           {

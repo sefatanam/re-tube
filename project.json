@@ -34,8 +34,8 @@
             "inject": true
           },
           {
-            "input": "src/assets/styles/main-theme.scss",
-            "bundleName": "main-theme",
+            "input": "src/assets/styles/light-theme.scss",
+            "bundleName": "light-theme",
             "inject": true
           },
           {
@@ -49,8 +49,8 @@
             "inject": true
           },
           {
-            "input": "src/assets/styles/global-material-ovveride.scss",
-            "bundleName": "global-material-ovveride",
+            "input": "src/assets/styles/material-overrides.scss",
+            "bundleName": "material-overrides",
             "inject": true
           }
         ],

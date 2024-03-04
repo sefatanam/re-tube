@@ -1,5 +1,7 @@
 /* For use in src/lib/core/theming/_palette.scss */
 :root {
+  --bg-color: #fff;
+
   --primary-50: #eef5fb;
   --primary-100: #d4e5f5;
   --primary-200: #b7d4ee;
@@ -44,4 +46,23 @@
   --warn-A200: #ffa4a4;
   --warn-A400: #ff7171;
   --warn-A700: #ff5858;
+
+  .dark {
+    --bg-color: #26282b;
+
+    --accent-50: #e4eef1;
+    --accent-100: #bdd6db;
+    --accent-200: #91bac3;
+    --accent-300: #649eab;
+    --accent-400: #438a99;
+    --accent-500: #227587;
+    --accent-600: #1e6d7f;
+    --accent-700: #196274;
+    --accent-800: #14586a;
+    --accent-900: #0c4557;
+    --accent-A100: #8ce0ff;
+    --accent-A200: #196274;
+    --accent-A400: #14586a;
+    --accent-A700: #0c4557;
+  }
 }

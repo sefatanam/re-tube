@@ -1,21 +1,26 @@
+@use "../../styles/palette" as pat;
 @use "@angular/material" as mat;
+@include mat.core();
 
 // dark theme
-$my-primary-dark: mat.define-palette(mat.$grey-palette);
-$my-accent-dark: mat.define-palette(mat.$blue-grey-palette, A200, A100, A400);
-$my-warn-dark: mat.define-palette(mat.$amber-palette);
+$my-primary-dark: mat.define-palette(pat.$primary-palette);
+$my-accent-dark: mat.define-palette(pat.$accent-palette, A200, A100, A400);
+$my-warn-dark: mat.define-palette(pat.$warn-palette);
 
 $dark-theme: mat.define-dark-theme(
   (
     color: (
       primary: $my-primary-dark,
       accent: $my-accent-dark,
+      warn: $my-warn-dark,
     ),
+    typography: mat.define-typography-config(),
+    density: 1,
   )
 );
 
 // For Dark mode
 .dark {
-  // background-color: var(--black);
+  background-color: var(--bg-color);
   @include mat.all-component-themes($dark-theme);
 }

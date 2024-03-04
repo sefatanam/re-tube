@@ -60,7 +60,8 @@ module.exports = {
           A200: "var(--warn-A200)",
           A400: "var(--warn-A400)",
           A700: "var(--warn-A700)",
-        }
+        },
+        background: "var(--bg-color)"
       }
     },
   },

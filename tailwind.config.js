@@ -1,15 +1,13 @@
-const { fontFamily } = require('tailwindcss/defaultTheme')
+const { fontFamily } = require("tailwindcss/defaultTheme");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: 'class',
-  content: [
-    "./src/**/*.{html,ts}",
-  ],
+  darkMode: "class",
+  content: ["./src/**/*.{html,ts}"],
   theme: {
     fontFamily: {
       ...fontFamily,
-      "sans": ["SF Pro Display", "system-ui", "sans-serif", ...fontFamily.sans]
+      sans: ["Poppins", "system-ui", "sans-serif", ...fontFamily.sans],
     },
     extend: {
       colors: {
@@ -61,12 +59,12 @@ module.exports = {
           A400: "var(--warn-A400)",
           A700: "var(--warn-A700)",
         },
-        background: "var(--bg-color)"
-      }
+        background: "var(--bg-color)",
+      },
     },
   },
   plugins: [],
-}
+};
 
 // greenish: '#DEE8E0',
 //       black: '#191919',

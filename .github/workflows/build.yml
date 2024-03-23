@@ -31,7 +31,7 @@ jobs:
     - run: pnpm install
     
     - name: Run Tests
-      run: pnpm run build --if-present
+      run: pnpm run test:ci
       
     - name: Build
-      run: pnpm test:ci
+      run: pnpm run build

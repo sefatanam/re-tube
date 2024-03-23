@@ -1,4 +1,3 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
@@ -23,15 +22,14 @@
     "allowJs": true,
     "lib": ["ES2022", "dom"],
     "paths": {
-      "@typings/*": ["typings/*"],
-      "@services/*": ["services/*"],
       "@components/*": ["app/components/*"],
-      "@pages/*": ["app/pages/*"],
       "@guards/*": ["guards/*"],
-      "@utils/*": ["utils/*"],
       "@interface/*": ["interfaces/*"],
-      "@validators/*": ["validators/*"],
-
+      "@pages/*": ["app/pages/*"],
+      "@services/*": ["services/*"],
+      "@typings/*": ["typings/*"],
+      "@utils/*": ["utils/*"],
+      "@validators/*": ["validators/*"]
     }
   },
   "angularCompilerOptions": {

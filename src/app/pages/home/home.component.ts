@@ -20,9 +20,9 @@ paragraph */
     gsap
       .timeline({ repeat: 0 })
       .from('.heading', {
-        scale: 14,
+        scale: 2,
         opacity: 0,
-        ease: 'circ',
+        ease: 'circ.in',
         duration: 1.5,
         stagger: 0.8,
       })

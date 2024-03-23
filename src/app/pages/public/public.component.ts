@@ -52,7 +52,7 @@ export class PublicComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     try {
-      this.videoInfos$ = this.youtubeService.getVideos('videos', 'publicVideos')
+      this.videoInfos$ = this.youtubeService.getVideos('videos', 'public')
     } catch (err) {
       this.toastService.error('Failed to fetch videos.')
     }

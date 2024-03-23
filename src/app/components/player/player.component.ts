@@ -40,7 +40,7 @@ import gsap from 'gsap';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PlayerComponent implements OnChanges, AfterViewInit {
+export class PlayerComponent implements OnChanges {
   @Input({ required: true }) videos: VideoInfoResponse[] | null = null;
   @Input({ required: true }) playlist_title!: string;
 
@@ -68,11 +68,5 @@ export class PlayerComponent implements OnChanges, AfterViewInit {
     this.safeURL = this.youtubeUtil.convertSafeYoutubeUrl(
       this.currentVideoInfo.videoId
     );
-  }
-
-  ngAfterViewInit(): void {
-    gsap.to('.title', {
-      opacity: 1,
-    });
   }
 }

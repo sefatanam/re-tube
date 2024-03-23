@@ -16,11 +16,6 @@
 
 Empowering users to rediscover, curate, and elevate their streaming experiences. Whether it's videos, podcasts, or live broadcasts, StreamRise offers a dynamic platform to explore, organize, and enjoy multimedia content tailored to your interests. 
 
-## Usage
-
-To get started with Re-Tube, simply navigate [Link](https://re-learn-pied.vercel.app/) <br>
-_NB: this vercel link currently in development previously known as re-learn, now it's re-brand as Re.Tube_
-
 ## Contributing
 
 Contributions to Re-Tube are welcome! If you'd like to contribute, please follow these prequisites & guidelines:

@@ -13,7 +13,7 @@ import {
   signOut,
   User
 } from "firebase/auth";
-import { db } from 'indexDB/db';
+
 
 const provider = new GoogleAuthProvider();
 
@@ -54,7 +54,7 @@ export class AuthService {
        * TODO: Perform user data persistance cleanup
        */
       this.router.navigateByUrl('/public');
-      db.privateVideos.clear()
+      // clear private videos
     }
   }
 

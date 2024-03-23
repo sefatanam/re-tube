@@ -71,7 +71,7 @@ export class ShareTargetComponent implements AfterViewInit {
       return;
     }
     await this.youtubeService.saveVideo(this.videoInfo, authUser.email);
-    await this.youtubeService.clearCache('privateVideos');
+    await this.youtubeService.clearCache('private');
     this.toaster.success('Video added to Personal Playlist');
     await this.router.navigate(['personal'], { queryParams: { uid: authUser.uid } })
   }

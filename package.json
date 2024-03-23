@@ -26,10 +26,10 @@
     "@angular/service-worker": "^17.0.8",
     "@angular/ssr": "^17.0.9",
     "@ngneat/hot-toast": "^6.1.0",
-    "dexie": "^3.2.4",
     "express": "^4.18.2",
     "firebase": "^10.7.1",
     "gsap": "^3.12.5",
+    "rxdb": "^15.12.0",
     "rxjs": "~7.8.1",
     "tslib": "^2.6.2",
     "zone.js": "~0.14.2"

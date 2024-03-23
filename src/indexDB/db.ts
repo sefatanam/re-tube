@@ -1,4 +1,4 @@
-import Dexie, { Table } from 'dexie';
+/* import Dexie, { Table } from 'dexie';
 import { VideoInfoResponse } from "@interface/video-info.interface";
 export class AppDB extends Dexie {
   publicVideos!: Table<VideoInfoResponse, "title">;
@@ -14,3 +14,4 @@ export class AppDB extends Dexie {
   }
 }
 export const db = new AppDB()
+ */

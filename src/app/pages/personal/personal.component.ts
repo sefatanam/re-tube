@@ -39,7 +39,7 @@ export class PersonalComponent implements OnInit {
     try {
       const authUserEmail = this.authUser()?.email;
       if (authUserEmail) {
-        this.videoInfos$ = this.youtubeService.getVideos(authUserEmail, 'privateVideos')
+        this.videoInfos$ = this.youtubeService.getVideos(authUserEmail, 'private')
       }
     } catch (err) {
       this.toastService.error('Failed to fetch videos.')

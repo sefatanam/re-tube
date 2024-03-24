@@ -1,9 +1,9 @@
-import { SHARED_URL_REGEX, YOUTUBE_URL_REGEX, youtubeUrlValidator } from "@validators/youtube.validators";
+import { SHARED_URL_REGEX, YOUTUBE_URL_REGEX } from "@validators/youtube.validators";
 import { inject, Injectable } from "@angular/core";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 import { VideoInfo } from "@interface/video-info.interface";
 import { User } from "firebase/auth";
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormGroup } from "@angular/forms";
 
 export type FromStatus<T extends boolean> = {
   data: T extends true ? VideoInfo : null,

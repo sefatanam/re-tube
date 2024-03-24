@@ -1,5 +1,5 @@
 {
   "css.customData": [".vscode/tailwind.json"],
   "editor.formatOnSave": true,
-  "editor.fontSize": 20
+  "editor.fontSize": 18
 }

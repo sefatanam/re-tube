@@ -6,7 +6,8 @@ export const SHARED_URL_REGEX = /[?&]v=([^&]+)/;
 
 export function youtubeUrlValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
-    const valid = YOUTUBE_URL_REGEX.test(control?.value);
+    if (!control?.value) return null;
+    const valid = YOUTUBE_URL_REGEX.test(control.value);
     return valid ? null : { pattern: true };
   };
 }
